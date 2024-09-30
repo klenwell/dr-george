@@ -1,4 +1,4 @@
-# Dr. George'
+# Dr. George
 
 A simple Python command line app to analyze and visualize public weather data (with a focus on Southern California).
 
@@ -28,7 +28,7 @@ $ source env/bin/activate
 
 ### run dr_george_app cli application
 
-$ dr_george_app --help
+$ dr_george --help
 
 
 ### run pytest / coverage
