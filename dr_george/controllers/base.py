@@ -61,4 +61,32 @@ class Base(Controller):
 
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
+        from ..config.secrets import NOAA_API_TOKEN
+        import requests
+
+        BASE_URL = 'https://www.ncei.noaa.gov/cdo-web/api/v2/'
+
+        headers = {
+            'token': NOAA_API_TOKEN
+        }
+
+        station_id = 'GHCND:USW00023119'  # NOAA station ID for Santa Ana, CA
+        start_date = '2023-01-01'
+        end_date = '2023-12-31'
+
+        url = f"{BASE_URL}data"
+        params = {
+            'datasetid': 'GHCND',
+            'stationid': station_id,
+            'startdate': start_date,
+            'enddate': end_date,
+            'limit': 1000,
+            'datatypeid': 'TMAX',  # Daily Maximum Temperature
+            'units': 'standard'  # Fahrenheit
+        }
+
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()['results']
+
         breakpoint()
