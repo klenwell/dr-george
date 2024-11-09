@@ -61,42 +61,17 @@ class Base(Controller):
 
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
+        from ..adapters.noaa import NoaaAdapter
         from ..config.secrets import NOAA_API_TOKEN
-        import requests
 
-        BASE_URL = 'https://www.ncei.noaa.gov/cdo-web/api/v2'
-        SA_STATION_ID = 'GHCND:USC00047888'  # NOAA station ID for Santa Ana, CA
-        BLYTHE_STATION_ID = 'GHCND:USW00023158'
+        santa_ana_station = 'GHCND:USC00047888'
+        noaa = NoaaAdapter(NOAA_API_TOKEN)
 
-        headers = {
-            'token': NOAA_API_TOKEN
-        }
-
-        # get year data
-        def fetch_max_data_for_year(station_id, year):
-            start_date = f'{year}-01-01'
-            end_date = f'{year}-12-31'
-
-            url = f"{BASE_URL}/data"
-            params = {
-                'datasetid': 'GHCND',
-                'stationid': station_id,
-                'startdate': start_date,
-                'enddate': end_date,
-                'limit': 1000,
-                'datatypeid': 'TMAX',  # Daily Maximum Temperature
-                'units': 'standard'  # Fahrenheit
-            }
-
-            response = requests.get(url, headers=headers, params=params)
-            response.raise_for_status()
-            data = response.json()['results']
-            return data
-
-        # pull data for several years
         annual_data = {}
         for year in range(1960, 2025, 1):
-            data = fetch_max_data_for_year(BLYTHE_STATION_ID, year)
+            data = noaa.get_tmax_by_year(santa_ana_station, year)
             annual_data[year] = data
             temps = [d['value'] for d in data]
             print(year, min(temps), max(temps), sum(temps)/len(temps))
+
+        breakpoint()
