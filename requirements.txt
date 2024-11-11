@@ -2,3 +2,6 @@ cement==3.0.10
 cement[jinja2]
 cement[yaml]
 cement[colorlog]
+
+# Requests for Website and API interactions
+requests
