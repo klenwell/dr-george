@@ -59,16 +59,24 @@ class Base(Controller):
 
         self.app.render(data, 'command1.jinja2')
 
+    # To run: python -m dr_george.main interactive
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
         from ..adapters.noaa import NoaaAdapter
         from ..config.secrets import NOAA_API_TOKEN
+        from ..models.weather_station import WeatherStation
+
+        cache = False
+        station = WeatherStation('santa_ana')
+        print(station.noaa_id)
+        data = station.get_tmax_by_year(1920, cache)
+        breakpoint()
 
         santa_ana_station = 'GHCND:USC00047888'
         noaa = NoaaAdapter(NOAA_API_TOKEN)
 
         annual_data = {}
-        for year in range(1960, 2025, 1):
+        for year in range(1920, 1921, 1):
             data = noaa.get_tmax_by_year(santa_ana_station, year)
             annual_data[year] = data
             temps = [d['value'] for d in data]

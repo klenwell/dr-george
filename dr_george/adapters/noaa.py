@@ -12,10 +12,7 @@ class NoaaAdapter:
     def __init__(self, api_token):
         self.token = api_token
 
-    def get_tmax_by_year(self, station_id, year):
-        start_date = f'{year}-01-01'
-        end_date = f'{year}-12-31'
-
+    def get_dataset(self, station_id, data_type_id, start_date, end_date):
         headers = {
             'token': self.token
         }
@@ -26,11 +23,17 @@ class NoaaAdapter:
             'startdate': start_date,
             'enddate': end_date,
             'limit': 1000,
-            'datatypeid': 'TMAX',  # Daily Maximum Temperature
+            'datatypeid': data_type_id,
             'units': 'standard'  # Fahrenheit
         }
 
         response = requests.get(self.url, headers=headers, params=params)
         response.raise_for_status()
-        data = response.json()['results']
-        return data
+        return response.json()
+
+    def get_tmax_by_year(self, station_id, year):
+        data_type_id = 'TMAX'
+        start_date = f'{year}-01-01'
+        end_date = f'{year}-12-31'
+
+        return self.get_dataset(station_id, data_type_id, start_date, end_date)
