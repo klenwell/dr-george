@@ -59,6 +59,39 @@ class Base(Controller):
 
         self.app.render(data, 'command1.jinja2')
 
+    # To run: python -m dr_george.main download
+    @ex(help="Run the Application interactively. Useful for testing and development.")
+    def download(self):
+        from ..adapters.noaa import NoaaAdapter
+        from ..config.secrets import NOAA_API_TOKEN
+        import json
+        import os
+        import zipfile
+
+        year = 1952
+        santa_ana_station = 'GHCND:USC00047888'
+        noaa = NoaaAdapter(NOAA_API_TOKEN)
+
+        fpath = f'/tmp/santa-ana-{year}.json'
+        zpath = f'/tmp/santa-ana-{year}.zip'
+
+        if os.path.exists(zpath):
+            print(f"reading from {zpath}")
+            with zipfile.ZipFile(zpath, 'r') as zipf:
+                with zipf.open(fpath) as file:
+                    data = json.load(file)
+
+        else:
+            data = noaa.get_tmax_by_year(santa_ana_station, year)
+            print(f"writing to {zpath}")
+            with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                with zipf.open(fpath, 'w') as file:
+                    json_string = json.dumps(data)
+                    file.write(json_string.encode('utf-8'))
+
+        breakpoint()
+
+
     # To run: python -m dr_george.main interactive
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
