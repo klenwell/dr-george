@@ -66,28 +66,25 @@ class Base(Controller):
         from ..config.secrets import NOAA_API_TOKEN
         import json
         import os
-        import zipfile
+        import gzip
 
         year = 1952
         santa_ana_station = 'GHCND:USC00047888'
         noaa = NoaaAdapter(NOAA_API_TOKEN)
 
         fpath = f'/tmp/santa-ana-{year}.json'
-        zpath = f'/tmp/santa-ana-{year}.zip'
+        zpath = f'{fpath}.gz'
 
         if os.path.exists(zpath):
             print(f"reading from {zpath}")
-            with zipfile.ZipFile(zpath, 'r') as zipf:
-                with zipf.open(fpath) as file:
-                    data = json.load(file)
+            with gzip.open(zpath, 'rt', encoding='utf-8') as f:  # 'rt' for reading text from gzip
+                data = json.load(f)
 
         else:
             data = noaa.get_tmax_by_year(santa_ana_station, year)
             print(f"writing to {zpath}")
-            with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as zipf:
-                with zipf.open(fpath, 'w') as file:
-                    json_string = json.dumps(data)
-                    file.write(json_string.encode('utf-8'))
+            with gzip.open(zpath, 'wt', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
 
         breakpoint()
 
