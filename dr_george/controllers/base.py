@@ -60,56 +60,29 @@ class Base(Controller):
         self.app.render(data, 'command1.jinja2')
 
     # To run: python -m dr_george.main download
-    @ex(help="Run the Application interactively. Useful for testing and development.")
+    @ex(help="Download data and store locally.")
     def download(self):
-        from ..adapters.noaa import NoaaAdapter
-        from ..config.secrets import NOAA_API_TOKEN
-        import json
-        import os
-        import gzip
+        from ..models.weather_station import WeatherStation
 
-        year = 1952
-        santa_ana_station = 'GHCND:USC00047888'
-        noaa = NoaaAdapter(NOAA_API_TOKEN)
+        station = WeatherStation('santa_ana')
 
-        fpath = f'/tmp/santa-ana-{year}.json'
-        zpath = f'{fpath}.gz'
-
-        if os.path.exists(zpath):
-            print(f"reading from {zpath}")
-            with gzip.open(zpath, 'rt', encoding='utf-8') as f:  # 'rt' for reading text from gzip
-                data = json.load(f)
-
-        else:
-            data = noaa.get_tmax_by_year(santa_ana_station, year)
-            print(f"writing to {zpath}")
-            with gzip.open(zpath, 'wt', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=4)
-
-        breakpoint()
+        for year in range(1980, 2025, 1):
+            data = station.persist_tmax_by_year(year)
+            print(f"{year}: {data['metadata']['resultset']['count']} records")
 
 
     # To run: python -m dr_george.main interactive
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
-        from ..adapters.noaa import NoaaAdapter
-        from ..config.secrets import NOAA_API_TOKEN
         from ..models.weather_station import WeatherStation
 
-        cache = False
         station = WeatherStation('santa_ana')
-        print(station.noaa_id)
-        data = station.get_tmax_by_year(1920, cache)
-        breakpoint()
-
-        santa_ana_station = 'GHCND:USC00047888'
-        noaa = NoaaAdapter(NOAA_API_TOKEN)
 
         annual_data = {}
-        for year in range(1920, 1921, 1):
-            data = noaa.get_tmax_by_year(santa_ana_station, year)
-            annual_data[year] = data
-            temps = [d['value'] for d in data]
-            print(year, min(temps), max(temps), sum(temps)/len(temps))
+        for year in range(1920, 2025):
+            data = station.persist_tmax_by_year(year)
+            annual_data[year] = data['results']
+            temps = [d['value'] for d in data['results']]
+            print(year, len(temps), min(temps), max(temps), sum(temps)/len(temps))
 
         breakpoint()
