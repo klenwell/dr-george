@@ -75,8 +75,13 @@ class Base(Controller):
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
         from ..models.weather_station import WeatherStation
+        from ..models.annual_station_summary import AnnualStationSummary
 
         station = WeatherStation('santa_ana')
+        summary = AnnualStationSummary(station, 2014)
+        print(len(summary.tmax_results))
+
+        breakpoint()
 
         annual_data = {}
         for year in range(1920, 2025):

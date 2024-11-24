@@ -2,7 +2,7 @@ import os
 import gzip
 import json
 
-from ..config.stations import STATIONS
+from ..config.noaa import STATIONS
 from ..config.secrets import NOAA_API_TOKEN
 from ..config.app import DATA_ROOT
 from ..adapters.noaa import NoaaAdapter
@@ -25,14 +25,11 @@ class WeatherStation:
         return f'GHCND:{self.noaa_id}'
 
     def persist_tmax_by_year(self, year):
-        fpath = f'{DATA_ROOT}/noaa/tmax/{self.noaa_id}-{year}.json'
-        zpath = f'{fpath}.gz'
+        zpath = self.tmax_json_zpath(year)
 
         if os.path.exists(zpath):
             print(f"{year}: {zpath} exists")
-            with gzip.open(zpath, 'rt', encoding='utf-8') as f:
-                data = json.load(f)
-
+            return self.tmax_data_by_year(year)
         else:
             data = self.noaa.get_tmax_by_year(self.api_id, year)
             print(f"{year}: writing to {zpath}")
@@ -40,3 +37,14 @@ class WeatherStation:
                 json.dump(data, f, ensure_ascii=False, indent=4)
 
         return data
+
+    def tmax_data_by_year(self, year):
+        zpath = self.tmax_json_zpath(year)
+        with gzip.open(zpath, 'rt', encoding='utf-8') as f:
+                return json.load(f)
+
+    def tmax_json_path(self, year):
+        return f'{DATA_ROOT}/noaa/tmax/{self.noaa_id}-{year}.json'
+
+    def tmax_json_zpath(self, year):
+        return f'{self.tmax_json_path(year)}.gz'
