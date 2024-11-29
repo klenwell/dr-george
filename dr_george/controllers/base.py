@@ -76,18 +76,21 @@ class Base(Controller):
     def interactive(self):
         from ..models.weather_station import WeatherStation
         from ..models.annual_station_summary import AnnualStationSummary
+        from ..libs.calendar import date, date_to_abs_day_num
 
         station = WeatherStation('santa_ana')
-        summary = AnnualStationSummary(station, 1972)
-        print(len(summary.doy_max_temps))
+        print(len(station.annual_summaries))
+
+        today = date.today()
+        abs_day_num = date_to_abs_day_num(today)
+        print(station.avg_max_temp_by_doy(abs_day_num))
+        report = station.max_temp_by_doy(abs_day_num)
+        print(report)
 
         breakpoint()
 
-        annual_data = {}
-        for year in range(1920, 2025):
-            data = station.persist_tmax_by_year(year)
-            annual_data[year] = data['results']
-            temps = [d['value'] for d in data['results']]
-            print(year, len(temps), min(temps), max(temps), sum(temps)/len(temps))
-
-        breakpoint()
+        max_rains = []
+        for year in range(station.start_year, 2025):
+            report = station.max_rain_by_year(year)
+            max_rains.append(report)
+        print(sorted(max_rains, key=lambda r:r.precipitation, reverse=True))
