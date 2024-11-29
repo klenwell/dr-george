@@ -2,6 +2,7 @@ import requests
 
 
 BASE_URL = 'https://www.ncei.noaa.gov/cdo-web/api/v2'
+DATA_TYPES_ID = 'TMAX, TMIN, PRCP'
 
 
 class NoaaAdapter:
@@ -31,8 +32,8 @@ class NoaaAdapter:
         response.raise_for_status()
         return response.json()
 
-    def get_tmax_by_year(self, station_id, year):
-        data_type_id = 'TMAX'
+    def get_json_records_by_year(self, station_id, year):
+        data_type_id = DATA_TYPES_ID
         start_date = f'{year}-01-01'
         end_date = f'{year}-12-31'
 

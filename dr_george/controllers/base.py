@@ -66,8 +66,8 @@ class Base(Controller):
 
         station = WeatherStation('santa_ana')
 
-        for year in range(1980, 2025, 1):
-            data = station.persist_tmax_by_year(year)
+        for year in range(station.start_year, 2025, 1):
+            data = station.persist_json_records_by_year(year)
             print(f"{year}: {data['metadata']['resultset']['count']} records")
 
 
@@ -78,8 +78,8 @@ class Base(Controller):
         from ..models.annual_station_summary import AnnualStationSummary
 
         station = WeatherStation('santa_ana')
-        summary = AnnualStationSummary(station, 2014)
-        print(len(summary.tmax_results))
+        summary = AnnualStationSummary(station, 1972)
+        print(len(summary.doy_max_temps))
 
         breakpoint()
 

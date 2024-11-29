@@ -1,5 +1,6 @@
 from functools import cached_property
 from datetime import datetime, date, timedelta
+from decimal import Decimal
 
 from ..config.noaa import DATE_FORMAT
 
@@ -10,41 +11,48 @@ class AnnualStationSummary:
         self.year = year
 
     @cached_property
-    def tmax_data(self):
-        return self.station.tmax_data_by_year(self.year)
+    def json_data(self):
+        return self.station.json_records_by_year(self.year)
 
     @cached_property
-    def tmax_data(self):
-        return self.station.tmax_data_by_year(self.year)
+    def json_metadata(self):
+        return self.json_data['metadata']['resultset']
 
     @cached_property
-    def tmax_metadata(self):
-        return self.tmax_data['metadata']['resultset']
+    def json_results(self):
+        return self.json_data['results']
 
     @cached_property
-    def tmax_results(self):
-        return self.tmax_data['results']
+    def max_temp_records(self):
+        return self.extract_records_by_datatype('TMAX')
 
     @cached_property
-    def tmax_dated_results(self):
-        dated_results = {}
-        for result in self.tmax_results:
-            result_date = self.date_str_to_date(result['date'])
-            dated_results[result_date] = result
-        return dated_results
+    def precipitation_records(self):
+        return self.extract_records_by_datatype('PRCP')
 
     @cached_property
-    def dates(self):
-        return sorted(self.tmax_dated_results.keys())
+    def dated_max_temps(self):
+        dated_values = {}
+        for record in self.max_temp_records:
+            result_date = self.date_str_to_date(record['date'])
+            dated_values[result_date] = Decimal(record['value'])
+        return dated_values
 
     @cached_property
-    def doy_values(self):
-        day_values = {}
+    def dated_precipitation(self):
+        dated_values = {}
+        for record in self.precipitation_records:
+            result_date = self.date_str_to_date(record['date'])
+            dated_values[result_date] = Decimal(record['value'])
+        return dated_values
+
+    @cached_property
+    def doy_max_temps(self):
+        day_of_year_temps = {}
         for day_num in self.days_of_leap_year:
             dated = self.day_of_leap_year_to_date(day_num)
-            value = self.tmax_dated_results.get(dated)
-            day_values[day_num] = value
-        return day_values
+            day_of_year_temps[day_num] = self.dated_max_temps.get(dated)
+        return day_of_year_temps
 
     @property
     def days_of_leap_year(self):
@@ -58,12 +66,20 @@ class AnnualStationSummary:
     def dates_missing(self):
         missing_dates = []
         for day_num in self.days_of_leap_year:
-            value = self.doy_values[day_num]
+            value = self.doy_tmax_values[day_num]
             if not value:
                 missing_date = self.day_of_leap_year_to_date(day_num)
                 if missing_date:
                     missing_dates.append(missing_date)
         return missing_dates
+
+    def extract_records_by_datatype(self, datatype):
+        records = []
+        for record in self.json_results:
+            record_type = record.get('datatype')
+            if record_type == datatype:
+                records.append(record)
+        return records
 
     def has_leap_day(self):
         leap_day_num = 60

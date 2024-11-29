@@ -21,30 +21,42 @@ class WeatherStation:
         return self.config['noaa_id']
 
     @property
+    def start_year(self):
+        return int(self.config['start_year'])
+
+    @property
     def api_id(self):
         return f'GHCND:{self.noaa_id}'
 
-    def persist_tmax_by_year(self, year):
-        zpath = self.tmax_json_zpath(year)
+    def persist_json_records_by_year(self, year):
+        zpath = self.json_zpath_by_year(year)
 
         if os.path.exists(zpath):
             print(f"{year}: {zpath} exists")
-            return self.tmax_data_by_year(year)
+            return self.json_records_by_year(year)
         else:
-            data = self.noaa.get_tmax_by_year(self.api_id, year)
+            data = self.noaa.get_json_records_by_year(self.api_id, year)
             print(f"{year}: writing to {zpath}")
             with gzip.open(zpath, 'wt', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
 
         return data
 
-    def tmax_data_by_year(self, year):
-        zpath = self.tmax_json_zpath(year)
+    def json_records_by_year(self, year):
+        zpath = self.json_zpath_by_year(year)
         with gzip.open(zpath, 'rt', encoding='utf-8') as f:
                 return json.load(f)
 
-    def tmax_json_path(self, year):
-        return f'{DATA_ROOT}/noaa/tmax/{self.noaa_id}-{year}.json'
+    def max_temps_by_year(self, year):
+        max_temps = []
+        for record in self.json_records_by_year(year):
+            datatype = record.get('datatype')
+            if datatype == 'TMAX':
+                max_temps.append(record)
+        return max_temps
 
-    def tmax_json_zpath(self, year):
-        return f'{self.tmax_json_path(year)}.gz'
+    def json_path_by_year(self, year):
+        return f'{DATA_ROOT}/noaa/json/{self.noaa_id}-{year}.json'
+
+    def json_zpath_by_year(self, year):
+        return f'{self.json_path_by_year(year)}.gz'
