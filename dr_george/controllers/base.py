@@ -90,7 +90,8 @@ class Base(Controller):
         breakpoint()
 
         max_rains = []
-        for year in range(station.start_year, 2025):
+        for year in station.years:
             report = station.max_rain_by_year(year)
             max_rains.append(report)
-        print(sorted(max_rains, key=lambda r:r.precipitation, reverse=True))
+            print(station.annual_summaries_by_year[year])
+        print(sorted(max_rains, key=lambda r:r.precipitation, reverse=True)[:10])

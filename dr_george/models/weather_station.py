@@ -33,14 +33,22 @@ class WeatherStation:
     def api_id(self):
         return f'GHCND:{self.noaa_id}'
 
+    @property
+    def years(self):
+        this_year = date.today().year
+        return range(self.start_year, this_year+1)
+
+    @cached_property
+    def annual_summaries_by_year(self):
+        summaries_map = {}
+        for year in self.years:
+            summary = AnnualStationSummary(self, year)
+            summaries_map[year] = summary
+        return summaries_map
+
     @cached_property
     def annual_summaries(self):
-        summaries = []
-        this_year = date.today().year
-        for year in range(self.start_year, this_year+1):
-            summary = AnnualStationSummary(self, year)
-            summaries.append(summary)
-        return summaries
+        return sorted(self.annual_summaries_by_year.values(), key=lambda s: s.year)
 
     def daily_summaries_by_doy(self, day_of_year):
         daily_summaries = []
@@ -78,6 +86,13 @@ class WeatherStation:
         valid_reports = [report for report in daily_reports if report.max_temp != None]
         sorted_reports = sorted(valid_reports, key=lambda r: (r.max_temp, r.year), reverse=True)
         return sorted_reports[0]
+
+    def max_rain_by_year(self, year):
+        summary = self.annual_summaries_by_year[year]
+        valid_reports = [dr for dr in summary.daily_reports if dr.precipitation != None]
+        sorted_reports = sorted(valid_reports, key=lambda r: r.precipitation, reverse=True)
+        return sorted_reports[0]
+
 
     def json_path_by_year(self, year):
         return f'{DATA_ROOT}/noaa/json/{self.noaa_id}-{year}.json'

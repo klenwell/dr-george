@@ -1,6 +1,6 @@
 from functools import cached_property
-from datetime import datetime, date, timedelta
 from decimal import Decimal
+import statistics
 
 from ..config.noaa import DATE_FORMAT
 from ..models.daily_station_summary import DailyStationSummary
@@ -73,15 +73,28 @@ class AnnualStationSummary:
         return reports
 
     @property
-    def dates_missing(self):
-        missing_dates = []
-        for day_num in self.days_of_leap_year:
-            value = self.doy_tmax_values[day_num]
-            if not value:
-                missing_date = self.day_of_leap_year_to_date(day_num)
-                if missing_date:
-                    missing_dates.append(missing_date)
-        return missing_dates
+    def daily_precipitation_reports(self):
+        return [dr for dr in self.daily_reports if dr.precipitation != None]
+
+    @property
+    def daily_tmax_reports(self):
+        return [dr for dr in self.daily_reports if dr.max_temp != None]
+
+    @property
+    def daily_tmin_reports(self):
+        return [dr for dr in self.daily_reports if dr.min_temp != None]
+
+    @property
+    def total_precipitation(self):
+        return sum([dr.precipitation for dr in self.daily_precipitation_reports])
+
+    @property
+    def avg_max_temp(self):
+        return statistics.mean([dr.max_temp for dr in self.daily_tmax_reports])
+
+    @property
+    def avg_min_temp(self):
+        return statistics.mean([dr.min_temp for dr in self.daily_tmin_reports])
 
     def daily_summary_by_doy(self, day_of_year):
         i = day_of_year - 1
@@ -94,3 +107,11 @@ class AnnualStationSummary:
             if record_type == datatype:
                 records.append(record)
         return records
+
+    def __repr__(self):
+        id = self.station.id_key
+        y = self.year
+        hi = self.avg_max_temp
+        lo = self.avg_min_temp
+        rain = self.total_precipitation
+        return f"<Annual {id} {y} avg_hi={hi:.1f} avg_lo={lo:.1f} rain={rain:.1f}>"

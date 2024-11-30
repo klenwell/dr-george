@@ -16,4 +16,4 @@ class DailyStationSummary:
         maxt = self.max_temp
         mint = self.min_temp
         rain = self.precipitation
-        return f"<{id} {d} max_temp={maxt} min_temp={mint} rain={rain}>"
+        return f"<{id} {d} max_temp={maxt} min_temp={mint} rain={rain:.2f}>"
