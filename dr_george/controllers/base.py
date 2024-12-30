@@ -59,19 +59,39 @@ class Base(Controller):
 
         self.app.render(data, 'command1.jinja2')
 
+    # To run: python -m dr_george.main download
+    @ex(help="Download data and store locally.")
+    def download(self):
+        from ..models.weather_station import WeatherStation
+
+        station = WeatherStation('santa_ana')
+
+        for year in range(station.start_year, 2025, 1):
+            data = station.persist_json_records_by_year(year)
+            print(f"{year}: {data['metadata']['resultset']['count']} records")
+
+
+    # To run: python -m dr_george.main interactive
     @ex(help="Run the Application interactively. Useful for testing and development.")
     def interactive(self):
-        from ..adapters.noaa import NoaaAdapter
-        from ..config.secrets import NOAA_API_TOKEN
+        from ..models.weather_station import WeatherStation
+        from ..models.annual_station_summary import AnnualStationSummary
+        from ..libs.calendar import date, date_to_abs_day_num
 
-        santa_ana_station = 'GHCND:USC00047888'
-        noaa = NoaaAdapter(NOAA_API_TOKEN)
+        station = WeatherStation('santa_ana')
+        print(len(station.annual_summaries))
 
-        annual_data = {}
-        for year in range(1960, 2025, 1):
-            data = noaa.get_tmax_by_year(santa_ana_station, year)
-            annual_data[year] = data
-            temps = [d['value'] for d in data]
-            print(year, min(temps), max(temps), sum(temps)/len(temps))
+        today = date.today()
+        abs_day_num = date_to_abs_day_num(today)
+        print(station.avg_max_temp_by_doy(abs_day_num))
+        report = station.max_temp_by_doy(abs_day_num)
+        print(report)
 
         breakpoint()
+
+        max_rains = []
+        for year in station.years:
+            report = station.max_rain_by_year(year)
+            max_rains.append(report)
+            print(station.annual_summaries_by_year[year])
+        print(sorted(max_rains, key=lambda r:r.precipitation, reverse=True)[:10])
