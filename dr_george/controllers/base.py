@@ -70,9 +70,9 @@ class Base(Controller):
             data = station.persist_json_records_by_year(year)
             print(f"{year}: {data['metadata']['resultset']['count']} records")
 
-    # To run: python -m dr_george.main extract
+    # To run: python -m dr_george.main export
     @ex(help="Download data and store locally.")
-    def extract(self):
+    def export(self):
         from ..models.weather_station import WeatherStation
         from ..config.app import GH_PAGES_ROOT, path_join
         import json
@@ -80,13 +80,11 @@ class Base(Controller):
         station = WeatherStation('santa_ana')
         year = 2024
         summary = station.annual_summaries_by_year[year]
-
-        # Export 2024 data to file
-        json_file = f"{station.noaa_id}-2024.json"
+        json_file = f"{station.noaa_id}-{year}.json"
         json_path = path_join(GH_PAGES_ROOT, 'data', 'basic', json_file)
 
         json_data = {
-            'station': station.noaa_id,
+            'noaa_id': station.noaa_id,
             'year': year,
             'daily': [dr.to_dict() for dr in summary.daily_reports]
         }
