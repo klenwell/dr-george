@@ -28,6 +28,10 @@ const BasicModelConfig = {
       return BasicModelConfig.readyEvent
     }
 
+    get dailies() {
+      return this.data.daily;
+    }
+
     /*
      * Public Methods
     **/
@@ -35,6 +39,18 @@ const BasicModelConfig = {
       fetch(this.config.extractUrl)
         .then(response => response.json())
         .then(data => this.onFetchComplete(data))
+    }
+
+    byDayNum(num) {
+      const i = num - 1;
+      const daily = this.dailies[i];
+      const record = {
+        date: this.dateTime.fromISO(daily.date),
+        max: parseInt(daily.max_temp),
+        min: parseInt(daily.min_temp),
+        rain: parseFloat(daily.precipitation)
+      };
+      return record;
     }
 
     /*
