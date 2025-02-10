@@ -59,7 +59,7 @@
         <li class="nav-item" role="presentation">
           <button
             id="pills-data-tab" data-bs-target="#data-tab" aria-controls="data-tab"
-            class="nav-link active"  data-bs-toggle="pill"
+            class="nav-link"  data-bs-toggle="pill"
             type="button" role="tab"  aria-selected="true">
             Data
           </button>
@@ -67,7 +67,7 @@
         <li class="nav-item" role="presentation">
           <button
             id="pills-chart-tab" data-bs-target="#chart-tab" aria-controls="chart-tab"
-            class="nav-link"  data-bs-toggle="pill"
+            class="nav-link active"  data-bs-toggle="pill"
             type="button" role="tab"  aria-selected="true">
             Chart
           </button>
@@ -83,7 +83,7 @@
         -->
         <div
           id="data-tab" aria-labelledby="data-tab"
-          class="tab-pane fade show active" role="tabpanel" >
+          class="tab-pane fade" role="tabpanel" >
           <section id="basic-data">
             <h3>Data</h3>
             <table class="table table-sm">
@@ -112,11 +112,11 @@
         -->
         <div
           id="chart-tab" aria-labelledby="chart-tab"
-          class="tab-pane fade" role="tabpanel" >
+          class="tab-pane fade show active" role="tabpanel" >
           <section id="basic-chart">
             <h3 class="mt-5">Chart</h3>
             <div class="chart-block mt-1">
-              <canvas id="sample-chart"></canvas>
+              <canvas id="basic-chart"></canvas>
             </div>
             <h4>Notes</h4>
             <ul>
