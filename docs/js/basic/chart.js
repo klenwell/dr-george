@@ -45,14 +45,18 @@ class BasicChart {
      * Methods
     **/
     lazyRender() {
+      const delay = 1000;
       const minDataset = this.toDataset(this.model.mins, 'Min Temp', 'blue');
       const maxDataset = this.toDataset(this.model.maxes, 'Max Temp', 'orange');
+      const datasets = [minDataset, maxDataset];
       let chart = new Chart(this.canvas, this.config);
 
-      [minDataset, maxDataset].forEach((dataset) => {
-        console.log('push', dataset)
-        chart.data.datasets.push(dataset)
-        chart.update()
+      datasets.forEach((dataset, index) => {
+        setTimeout(() => {
+          console.log('push', dataset);
+          chart.data.datasets.push(dataset);
+          chart.update();
+        }, index * delay); // 1-second delay between each update
       });
     }
   }
