@@ -8,7 +8,7 @@
 **/
 const BasicModelConfig = {
   readyEvent: 'BasicModel:data:ready',
-  extractUrl: 'data/basic/USC00047888-2024.json'
+  extractUrl: 'data/USC00047888-2024.json'
 }
 
 
