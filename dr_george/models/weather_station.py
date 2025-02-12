@@ -30,13 +30,16 @@ class WeatherStation:
         return int(self.config['start_year'])
 
     @property
+    def end_year(self):
+        return self.config.get('end_year', date.today().year)
+
+    @property
     def api_id(self):
         return f'GHCND:{self.noaa_id}'
 
     @property
     def years(self):
-        this_year = date.today().year
-        return range(self.start_year, this_year+1)
+        return range(self.start_year, self.end_year+1)
 
     @cached_property
     def annual_summaries_by_year(self):

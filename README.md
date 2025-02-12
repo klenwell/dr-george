@@ -10,6 +10,16 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
+## Local Web Server
+To test web pages in docs directory,
+
+```
+cd docs
+python -m http.server 3001
+```
+
+http://localhost:3001/
+
 ## Development
 
 This project includes a number of helpers in the `Makefile` to streamline common development tasks.
