@@ -3,6 +3,8 @@ from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
 
+from ..models.weather_station import WeatherStation
+
 VERSION_BANNER = """
 Dr. George analyzes public weather data. %s
 %s
@@ -26,6 +28,22 @@ class Base(Controller):
               { 'action'  : 'version',
                 'version' : VERSION_BANNER } ),
         ]
+
+    # To run: python -m dr_george.main download <station_id>
+    # NOTE: station_id must be defined in config/noaa.py
+    @ex(
+        help="Download NOAA weather station data and store locally.",
+        arguments=[
+            (['station_id'], dict(action='store', nargs=1)),
+        ],
+    )
+    def download(self):
+        station_id = self.app.pargs.station_id[0]
+        station = WeatherStation(station_id)
+
+        for year in range(station.start_year, station.end_year+1, 1):
+            data = station.persist_json_records_by_year(year)
+            print(f"{year}: {data['metadata']['resultset']['count']} records")
 
 
     def _default(self):
@@ -58,17 +76,6 @@ class Base(Controller):
             data['foo'] = self.app.pargs.foo
 
         self.app.render(data, 'command1.jinja2')
-
-    # To run: python -m dr_george.main download
-    @ex(help="Download data and store locally.")
-    def download(self):
-        from ..models.weather_station import WeatherStation
-
-        station = WeatherStation('santa_ana')
-
-        for year in range(station.start_year, station.end_year, 1):
-            data = station.persist_json_records_by_year(year)
-            print(f"{year}: {data['metadata']['resultset']['count']} records")
 
     # To run: python -m dr_george.main export
     @ex(help="Download data and store locally.")
