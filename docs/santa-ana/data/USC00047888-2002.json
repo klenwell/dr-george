@@ -1,0 +1,2568 @@
+{
+  "noaa_id": "USC00047888",
+  "year": 2002,
+  "daily": [
+    {
+      "date": "2002-01-01",
+      "max_temp": "67.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-02",
+      "max_temp": "65.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-03",
+      "max_temp": "67.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-04",
+      "max_temp": "67.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-05",
+      "max_temp": "74.0",
+      "min_temp": "43.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-06",
+      "max_temp": "73.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-07",
+      "max_temp": "80.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-08",
+      "max_temp": "76.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-09",
+      "max_temp": "67.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-10",
+      "max_temp": "76.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-11",
+      "max_temp": "76.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-12",
+      "max_temp": "80.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-13",
+      "max_temp": "72.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-14",
+      "max_temp": "68.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-15",
+      "max_temp": "65.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-16",
+      "max_temp": "65.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-17",
+      "max_temp": "65.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-18",
+      "max_temp": "68.0",
+      "min_temp": "39.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-19",
+      "max_temp": "66.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-20",
+      "max_temp": "68.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-21",
+      "max_temp": "70.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-22",
+      "max_temp": "63.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-23",
+      "max_temp": "66.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-24",
+      "max_temp": "71.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-25",
+      "max_temp": "78.0",
+      "min_temp": "39.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-26",
+      "max_temp": "70.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-27",
+      "max_temp": "60.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-28",
+      "max_temp": "59.0",
+      "min_temp": "44.0",
+      "precipitation": "0.5",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-29",
+      "max_temp": "59.0",
+      "min_temp": "39.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-30",
+      "max_temp": "60.0",
+      "min_temp": "33.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-01-31",
+      "max_temp": "63.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-01",
+      "max_temp": "70.0",
+      "min_temp": "35.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-02",
+      "max_temp": "67.0",
+      "min_temp": "38.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-03",
+      "max_temp": "71.0",
+      "min_temp": "37.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-04",
+      "max_temp": "78.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-05",
+      "max_temp": "75.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-06",
+      "max_temp": "73.0",
+      "min_temp": "39.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-07",
+      "max_temp": "66.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-08",
+      "max_temp": "68.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-09",
+      "max_temp": "76.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-10",
+      "max_temp": "80.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-11",
+      "max_temp": "81.0",
+      "min_temp": "43.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-12",
+      "max_temp": "75.0",
+      "min_temp": "43.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-13",
+      "max_temp": "73.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-14",
+      "max_temp": "69.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-15",
+      "max_temp": "70.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-16",
+      "max_temp": "65.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-17",
+      "max_temp": "59.0",
+      "min_temp": "49.0",
+      "precipitation": "0.2",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-18",
+      "max_temp": "65.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-19",
+      "max_temp": "65.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-20",
+      "max_temp": "69.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-21",
+      "max_temp": "93.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-22",
+      "max_temp": "93.0",
+      "min_temp": "49.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-23",
+      "max_temp": "84.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-24",
+      "max_temp": "75.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-25",
+      "max_temp": "77.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-26",
+      "max_temp": "85.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-27",
+      "max_temp": "79.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-02-28",
+      "max_temp": "74.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": null,
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-01",
+      "max_temp": "74.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-02",
+      "max_temp": "73.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-03",
+      "max_temp": "76.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-04",
+      "max_temp": "79.0",
+      "min_temp": "40.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-05",
+      "max_temp": "78.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-06",
+      "max_temp": "75.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-07",
+      "max_temp": "65.0",
+      "min_temp": "59.0",
+      "precipitation": "0.2",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-08",
+      "max_temp": "65.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-09",
+      "max_temp": "75.0",
+      "min_temp": "44.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-10",
+      "max_temp": "73.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-11",
+      "max_temp": "71.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-12",
+      "max_temp": "74.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-13",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-14",
+      "max_temp": "69.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-15",
+      "max_temp": "65.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-16",
+      "max_temp": "60.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-17",
+      "max_temp": "62.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-18",
+      "max_temp": "68.0",
+      "min_temp": "41.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-19",
+      "max_temp": "71.0",
+      "min_temp": "42.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-20",
+      "max_temp": "79.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-21",
+      "max_temp": "80.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-22",
+      "max_temp": "74.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-23",
+      "max_temp": "66.0",
+      "min_temp": "51.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-24",
+      "max_temp": "65.0",
+      "min_temp": "49.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-25",
+      "max_temp": "69.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-26",
+      "max_temp": "72.0",
+      "min_temp": "46.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-27",
+      "max_temp": "69.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-28",
+      "max_temp": "63.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-29",
+      "max_temp": "71.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-30",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-03-31",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-01",
+      "max_temp": "67.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-02",
+      "max_temp": "65.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-03",
+      "max_temp": "61.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-04",
+      "max_temp": "70.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-05",
+      "max_temp": "68.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-06",
+      "max_temp": "66.0",
+      "min_temp": "52.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-07",
+      "max_temp": "69.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-08",
+      "max_temp": "69.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-09",
+      "max_temp": "72.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-10",
+      "max_temp": "71.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-11",
+      "max_temp": "73.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-12",
+      "max_temp": "68.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-13",
+      "max_temp": "77.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-14",
+      "max_temp": "74.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-15",
+      "max_temp": "67.0",
+      "min_temp": "54.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-16",
+      "max_temp": "68.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-17",
+      "max_temp": "67.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-18",
+      "max_temp": "67.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-19",
+      "max_temp": "68.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-20",
+      "max_temp": "70.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-21",
+      "max_temp": "70.0",
+      "min_temp": "41.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-22",
+      "max_temp": "81.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-23",
+      "max_temp": "84.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-24",
+      "max_temp": "72.0",
+      "min_temp": "53.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-25",
+      "max_temp": "72.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-26",
+      "max_temp": "68.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-27",
+      "max_temp": "65.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-28",
+      "max_temp": "72.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-29",
+      "max_temp": "74.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-04-30",
+      "max_temp": "65.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-01",
+      "max_temp": "68.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-02",
+      "max_temp": "69.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-03",
+      "max_temp": "71.0",
+      "min_temp": "49.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-04",
+      "max_temp": "71.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-05",
+      "max_temp": "70.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-06",
+      "max_temp": "71.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-07",
+      "max_temp": "67.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-08",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-09",
+      "max_temp": "75.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-10",
+      "max_temp": "72.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-11",
+      "max_temp": "72.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-12",
+      "max_temp": "92.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-13",
+      "max_temp": "92.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-14",
+      "max_temp": "83.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-15",
+      "max_temp": "75.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-16",
+      "max_temp": "70.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-17",
+      "max_temp": "76.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-18",
+      "max_temp": "69.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-19",
+      "max_temp": "71.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-20",
+      "max_temp": "61.0",
+      "min_temp": "70.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-21",
+      "max_temp": "68.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-22",
+      "max_temp": "72.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-23",
+      "max_temp": "73.0",
+      "min_temp": "49.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-24",
+      "max_temp": "75.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-25",
+      "max_temp": "71.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-26",
+      "max_temp": "71.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-27",
+      "max_temp": "74.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-28",
+      "max_temp": "74.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-29",
+      "max_temp": "83.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-30",
+      "max_temp": "80.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-05-31",
+      "max_temp": "81.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-01",
+      "max_temp": "75.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-02",
+      "max_temp": "74.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-03",
+      "max_temp": "71.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-04",
+      "max_temp": "78.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-05",
+      "max_temp": "84.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-06",
+      "max_temp": "82.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-07",
+      "max_temp": "72.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-08",
+      "max_temp": "71.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-09",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-10",
+      "max_temp": "72.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-11",
+      "max_temp": "75.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-12",
+      "max_temp": "77.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-13",
+      "max_temp": "78.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-14",
+      "max_temp": "78.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-15",
+      "max_temp": "84.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-16",
+      "max_temp": "81.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-17",
+      "max_temp": "82.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-18",
+      "max_temp": "79.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-19",
+      "max_temp": "78.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-20",
+      "max_temp": "75.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-21",
+      "max_temp": "74.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-22",
+      "max_temp": "79.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-23",
+      "max_temp": "78.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-24",
+      "max_temp": "78.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-25",
+      "max_temp": "80.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-26",
+      "max_temp": "79.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-27",
+      "max_temp": "76.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-28",
+      "max_temp": "77.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-29",
+      "max_temp": "80.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-06-30",
+      "max_temp": "77.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-01",
+      "max_temp": "84.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-02",
+      "max_temp": "83.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-03",
+      "max_temp": "79.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-04",
+      "max_temp": "75.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-05",
+      "max_temp": "77.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-06",
+      "max_temp": "78.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-07",
+      "max_temp": "81.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-08",
+      "max_temp": "84.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-09",
+      "max_temp": "88.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-10",
+      "max_temp": "84.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-11",
+      "max_temp": "85.0",
+      "min_temp": "66.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-12",
+      "max_temp": "85.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-13",
+      "max_temp": "82.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-14",
+      "max_temp": "84.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-15",
+      "max_temp": "84.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-16",
+      "max_temp": "81.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-17",
+      "max_temp": "81.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-18",
+      "max_temp": "80.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-19",
+      "max_temp": "78.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-20",
+      "max_temp": "75.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-21",
+      "max_temp": "76.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-22",
+      "max_temp": "76.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-23",
+      "max_temp": "87.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-24",
+      "max_temp": "92.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-25",
+      "max_temp": "86.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-26",
+      "max_temp": "84.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-27",
+      "max_temp": "80.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-28",
+      "max_temp": "80.0",
+      "min_temp": "66.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-29",
+      "max_temp": "80.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-30",
+      "max_temp": "83.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-07-31",
+      "max_temp": "83.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-01",
+      "max_temp": "80.0",
+      "min_temp": "67.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-02",
+      "max_temp": "78.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-03",
+      "max_temp": "79.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-04",
+      "max_temp": "81.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-05",
+      "max_temp": "81.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-06",
+      "max_temp": "80.0",
+      "min_temp": "65.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-07",
+      "max_temp": "80.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-08",
+      "max_temp": "87.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-09",
+      "max_temp": "87.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-10",
+      "max_temp": "85.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-11",
+      "max_temp": "85.0",
+      "min_temp": "68.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-12",
+      "max_temp": "82.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-13",
+      "max_temp": "82.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-14",
+      "max_temp": "81.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-15",
+      "max_temp": "73.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-16",
+      "max_temp": "79.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-17",
+      "max_temp": "77.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-18",
+      "max_temp": "75.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-19",
+      "max_temp": "73.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-20",
+      "max_temp": "79.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-21",
+      "max_temp": "79.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-22",
+      "max_temp": "81.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-23",
+      "max_temp": "81.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-24",
+      "max_temp": "84.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-25",
+      "max_temp": "85.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-26",
+      "max_temp": "83.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-27",
+      "max_temp": "80.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-28",
+      "max_temp": "77.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-29",
+      "max_temp": "81.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-30",
+      "max_temp": "84.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-08-31",
+      "max_temp": "82.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-01",
+      "max_temp": "101.0",
+      "min_temp": "66.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-02",
+      "max_temp": "98.0",
+      "min_temp": "67.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-03",
+      "max_temp": "89.0",
+      "min_temp": "67.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-04",
+      "max_temp": "87.0",
+      "min_temp": "65.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-05",
+      "max_temp": "85.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-06",
+      "max_temp": "82.0",
+      "min_temp": "67.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-07",
+      "max_temp": "81.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-08",
+      "max_temp": "83.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-09",
+      "max_temp": "86.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-10",
+      "max_temp": "88.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-11",
+      "max_temp": "87.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-12",
+      "max_temp": "84.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-13",
+      "max_temp": "85.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-14",
+      "max_temp": "84.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-15",
+      "max_temp": "84.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-16",
+      "max_temp": "83.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-17",
+      "max_temp": "79.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-18",
+      "max_temp": "78.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-19",
+      "max_temp": "82.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-20",
+      "max_temp": "84.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-21",
+      "max_temp": "90.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-22",
+      "max_temp": "93.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-23",
+      "max_temp": "91.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-24",
+      "max_temp": "89.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-25",
+      "max_temp": "84.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-26",
+      "max_temp": "78.0",
+      "min_temp": "63.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-27",
+      "max_temp": "76.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-28",
+      "max_temp": "72.0",
+      "min_temp": "62.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-29",
+      "max_temp": "75.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-09-30",
+      "max_temp": "74.0",
+      "min_temp": "66.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-01",
+      "max_temp": "71.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-02",
+      "max_temp": "72.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-03",
+      "max_temp": "78.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-04",
+      "max_temp": "81.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-05",
+      "max_temp": "83.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-06",
+      "max_temp": "85.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-07",
+      "max_temp": "90.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-08",
+      "max_temp": "85.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-09",
+      "max_temp": "82.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-10",
+      "max_temp": "75.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-11",
+      "max_temp": "73.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-12",
+      "max_temp": "75.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-13",
+      "max_temp": "76.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-14",
+      "max_temp": "72.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-15",
+      "max_temp": "71.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-16",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-17",
+      "max_temp": "70.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-18",
+      "max_temp": "68.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-19",
+      "max_temp": "72.0",
+      "min_temp": "64.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-20",
+      "max_temp": "71.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-21",
+      "max_temp": "71.0",
+      "min_temp": "58.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-22",
+      "max_temp": "69.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-23",
+      "max_temp": "71.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-24",
+      "max_temp": "69.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-25",
+      "max_temp": "67.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-26",
+      "max_temp": "69.0",
+      "min_temp": "52.0",
+      "precipitation": "0.1",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-27",
+      "max_temp": "71.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-28",
+      "max_temp": "71.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-29",
+      "max_temp": "69.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-30",
+      "max_temp": "71.0",
+      "min_temp": "54.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-10-31",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-01",
+      "max_temp": "72.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-02",
+      "max_temp": "71.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-03",
+      "max_temp": "78.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-04",
+      "max_temp": "71.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-05",
+      "max_temp": "78.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-06",
+      "max_temp": "78.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-07",
+      "max_temp": "72.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-08",
+      "max_temp": "70.0",
+      "min_temp": "55.0",
+      "precipitation": "0.7",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-09",
+      "max_temp": "66.0",
+      "min_temp": "61.0",
+      "precipitation": "0.7",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-10",
+      "max_temp": "69.0",
+      "min_temp": "54.0",
+      "precipitation": "0.2",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-11",
+      "max_temp": "82.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-12",
+      "max_temp": "88.0",
+      "min_temp": "56.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-13",
+      "max_temp": "82.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-14",
+      "max_temp": "74.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-15",
+      "max_temp": "90.0",
+      "min_temp": "61.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-16",
+      "max_temp": "87.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-17",
+      "max_temp": "78.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-18",
+      "max_temp": "88.0",
+      "min_temp": "47.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-19",
+      "max_temp": "91.0",
+      "min_temp": "49.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-20",
+      "max_temp": "95.0",
+      "min_temp": "50.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-21",
+      "max_temp": "90.0",
+      "min_temp": "59.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-22",
+      "max_temp": "84.0",
+      "min_temp": "53.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-23",
+      "max_temp": "70.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-24",
+      "max_temp": "70.0",
+      "min_temp": "60.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-25",
+      "max_temp": "73.0",
+      "min_temp": "69.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-26",
+      "max_temp": "79.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-27",
+      "max_temp": "73.0",
+      "min_temp": "66.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-28",
+      "max_temp": "82.0",
+      "min_temp": "65.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-29",
+      "max_temp": "74.0",
+      "min_temp": "57.0",
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-11-30",
+      "max_temp": "69.0",
+      "min_temp": "53.0",
+      "precipitation": "0.2",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-01",
+      "max_temp": "71.0",
+      "min_temp": null,
+      "precipitation": "0.0",
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-02",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-03",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-04",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-05",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-06",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-07",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-08",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-09",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-10",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-11",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-12",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-13",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-14",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-15",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-16",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-17",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-18",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-19",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-20",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-21",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-22",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-23",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-24",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-25",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-26",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-27",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-28",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-29",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-30",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    },
+    {
+      "date": "2002-12-31",
+      "max_temp": null,
+      "min_temp": null,
+      "precipitation": null,
+      "station_id": "santa_ana"
+    }
+  ]
+}
