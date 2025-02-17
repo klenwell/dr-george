@@ -42,15 +42,27 @@ class Base(Controller):
         station = WeatherStation(station_id)
 
         for year in range(station.start_year, station.end_year+1, 1):
-            data = station.persist_json_records_by_year(year)
+            data = station.download_noaa_data_by_year(year)
             print(f"{year}: {data['metadata']['resultset']['count']} records")
 
+    # To run: python -m dr_george.main export <station_id>
+    @ex(
+        help="Export weather station data to json files for frontend use.",
+        arguments=[
+            (['station_id'], dict(action='store', nargs=1)),
+        ],
+    )
+    def export(self):
+        station_id = self.app.pargs.station_id[0]
+        station = WeatherStation(station_id)
+
+        for year in range(station.start_year, station.end_year+1, 1):
+            fpath = station.export_summary_to_json(year)
+            print(f"Exported {year}: {fpath}")
 
     def _default(self):
         """Default action if no sub-command is passed."""
-
         self.app.args.print_help()
-
 
     @ex(
         help='example sub command1',
@@ -76,31 +88,6 @@ class Base(Controller):
             data['foo'] = self.app.pargs.foo
 
         self.app.render(data, 'command1.jinja2')
-
-    # To run: python -m dr_george.main export
-    @ex(help="Download data and store locally.")
-    def export(self):
-        from ..models.weather_station import WeatherStation
-        from ..config.app import GH_PAGES_ROOT, path_join
-        import json
-
-        station = WeatherStation('santa_ana')
-        year = 2024
-        summary = station.annual_summaries_by_year[year]
-        json_file = f"{station.noaa_id}-{year}.json"
-        json_path = path_join(GH_PAGES_ROOT, 'data', 'basic', json_file)
-
-        json_data = {
-            'noaa_id': station.noaa_id,
-            'year': year,
-            'daily': [dr.to_dict() for dr in summary.daily_reports]
-        }
-
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, ensure_ascii=False, indent=2)
-
-        print(json_path)
-
 
     # To run: python -m dr_george.main interactive
     @ex(help="Run the Application interactively. Useful for testing and development.")

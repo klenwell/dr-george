@@ -16,6 +16,8 @@ class DailyStationSummary:
 
     @property
     def date_str(self):
+        if self.date is None:
+            return None
         return self.date.strftime('%Y-%m-%d')
 
     def to_dict(self):
