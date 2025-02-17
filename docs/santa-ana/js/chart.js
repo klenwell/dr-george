@@ -6,7 +6,7 @@
 **/
 const HistoricalTempChartConfig = {
   selector: 'canvas#chart',
-  startYear: 1906
+  startYear: 1917
 }
 
 
@@ -30,6 +30,13 @@ class HistoricalTempChart {
         data: {
           labels: this.labels,
           datasets: []
+        },
+        options: {
+          plugins: {
+            legend: {
+                display: false,
+            }
+          }
         }
       }
     }
@@ -55,8 +62,8 @@ class HistoricalTempChart {
       // Make sure we're counting against a leap year
       const dayZero = this.dateTime.local(2019, 12, 31);
       return this.dayNums.map((dayNum) => {
-        let date = dayOne.plus({days: dayNum});
-        let label = (date.day === 1) ? date.monthShort : null;
+        let date = dayZero.plus({days: dayNum});
+        let label = (date.day === 1) ? date.monthShort : date.day;
         return label;
       });
     }
@@ -68,20 +75,21 @@ class HistoricalTempChart {
       let chart = new Chart(this.canvas, this.chartConfig);
       let models = {};
 
-      this.years.forEach((year) => {
-        let model = this.renderYear(year, chart);
-        models[year] = model;
+      this.years.forEach(async (year) => {
+        if ( year > 1930 ) { return; };
+        let model = new AnnualStationData(year);
+        await model.fetchData();
+        await this.renderYear(model, chart);
+        //models[year] = model;
       });
     }
 
-    renderYear(year, chart) {
-      console.log(year);
-      let model = new AnnualStationData(year);
-      let minDataSet = this.toDataset(model.minTemps, 'Min Temp', 'lightblue');
-      let maxDataSet = this.toDataset(model.maxTemps, 'Max Temp', 'orange');
+    async renderYear(model, chart) {
+      let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, 'lightblue');
+      let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, 'orange');
       chart.data.datasets.push(minDataSet);
       chart.data.datasets.push(maxDataSet);
-      return model;
+      chart.update();
     }
 
     toDataset(data, label, color) {
