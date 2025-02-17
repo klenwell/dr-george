@@ -32,9 +32,36 @@ class HistoricalTempChart {
           datasets: []
         },
         options: {
+          animation: false,
           plugins: {
             legend: {
                 display: false,
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                autoSkip: false,
+                callback: function(value, index, values) {
+                  const dayZero = luxon.DateTime.local(2019, 12, 31);
+                  let date = dayZero.plus({days: index});
+                  return (date.day === 1) ? date.monthShort : '';
+                }
+              },
+              grid: {
+                display: true,
+                drawTicks: true,
+                color: function(context) {
+                  const gray = 'rgba(200, 200, 200, 0.8)';
+                  let tickColor = context.tick.label === '' ? 'transparent' : gray;
+                  return tickColor;
+                }
+              }
+            },
+            y: {
+              type: 'linear',
+              min: 20,
+              max: 120
             }
           }
         }
@@ -63,7 +90,8 @@ class HistoricalTempChart {
       const dayZero = this.dateTime.local(2019, 12, 31);
       return this.dayNums.map((dayNum) => {
         let date = dayZero.plus({days: dayNum});
-        let label = (date.day === 1) ? date.monthShort : date.day;
+        //let label = (date.day === 1) ? date.monthShort : `${date.month}/${date.day}`;
+        let label = `${date.month}/${date.day}`;
         return label;
       });
     }
@@ -76,7 +104,7 @@ class HistoricalTempChart {
       let models = {};
 
       this.years.forEach(async (year) => {
-        if ( year > 1930 ) { return; };
+        //if ( year > 2000 ) { return; };
         let model = new AnnualStationData(year);
         await model.fetchData();
         await this.renderYear(model, chart);
@@ -85,22 +113,40 @@ class HistoricalTempChart {
     }
 
     async renderYear(model, chart) {
-      let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, 'lightblue');
-      let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, 'orange');
+      const minHex = '0088ff';
+      const maxHex = 'ff8800'
+
+      let lineOp = this.opacityByYear(model.year);
+      let minColor = `#${minHex}${lineOp}`;
+      let maxColor = `#${maxHex}${lineOp}`;
+      let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, minColor);
+      let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, maxColor);
+
       chart.data.datasets.push(minDataSet);
       chart.data.datasets.push(maxDataSet);
       chart.update();
+    }
+
+    opacityByYear(year) {
+      const opMin = 20;
+      const opMax = 80;
+      const opRange = opMax - opMin;
+      const yearRange = this.thisYear - this.config.startYear;
+      const yearIdx = year - this.config.startYear;
+      const yearQuot = yearIdx / yearRange;
+      const opIdx = yearQuot * opRange;
+      return Math.round(opMin + opIdx);
     }
 
     toDataset(data, label, color) {
       return {
         label: label,
         fill: false,
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: color,
-        pointRadius: 2,
+        pointRadius: 1,
         data: data,
-        tension: 0.2
+        tension: 0.5
       }
     }
 
