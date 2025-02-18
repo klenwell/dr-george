@@ -2559,9 +2559,9 @@
     },
     {
       "date": "1975-12-31",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "62.0",
+      "min_temp": "48.0",
+      "precipitation": "0.0",
       "station_id": "santa_ana"
     }
   ]

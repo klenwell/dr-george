@@ -2468,100 +2468,100 @@
     },
     {
       "date": "1921-12-18",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "72.0",
+      "min_temp": "52.0",
+      "precipitation": "0.6",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-19",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "60.0",
+      "min_temp": "58.0",
+      "precipitation": "1.7",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-20",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "63.0",
+      "min_temp": "58.0",
+      "precipitation": "0.6",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-21",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "62.0",
+      "min_temp": "54.0",
+      "precipitation": "1.8",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-22",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "61.0",
+      "min_temp": "48.0",
+      "precipitation": "0.7",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-23",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "61.0",
+      "min_temp": "41.0",
+      "precipitation": "0.4",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-24",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "59.0",
+      "min_temp": "45.0",
+      "precipitation": "0.0",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-25",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "59.0",
+      "min_temp": "45.0",
+      "precipitation": "0.2",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-26",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "57.0",
+      "min_temp": "48.0",
+      "precipitation": "1.4",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-27",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "64.0",
+      "min_temp": "52.0",
+      "precipitation": "0.3",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-28",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "61.0",
+      "min_temp": "51.0",
+      "precipitation": "0.2",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-29",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "67.0",
+      "min_temp": "51.0",
+      "precipitation": "0.0",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-30",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "80.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
       "station_id": "santa_ana"
     },
     {
       "date": "1921-12-31",
-      "max_temp": null,
-      "min_temp": null,
-      "precipitation": null,
+      "max_temp": "73.0",
+      "min_temp": "52.0",
+      "precipitation": "0.0",
       "station_id": "santa_ana"
     }
   ]
