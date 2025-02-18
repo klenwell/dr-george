@@ -24,13 +24,40 @@ class NoaaAdapter:
             'startdate': start_date,
             'enddate': end_date,
             'limit': 1000,
+            'offset': 1,
             'datatypeid': data_type_id,
             'units': 'standard'  # Fahrenheit
         }
 
-        response = requests.get(self.url, headers=headers, params=params)
-        response.raise_for_status()
-        return response.json()
+        # Make paginated requests
+        stitched_data = None
+
+        # Source: https://chatgpt.com/share/67b3d0ab-db38-800e-ac5e-b6990e15eb3d
+        while True:
+            response = requests.get(self.url, headers=headers, params=params)
+            response.raise_for_status()
+
+            data = response.json()
+
+            if not stitched_data:
+                stitched_data = data
+            else:
+                stitched_data['results'].extend(data.get('results', []))
+
+            # Check if more data exists
+            resultset = data.get("metadata", {}).get("resultset", {})
+            total_records = resultset.get("count", 0)
+            offset = resultset.get("offset", 1)
+            limit = resultset.get("limit", 1000)
+
+            # Break if we've fetched all records
+            if offset + limit > total_records:
+                break
+
+            # Update the offset for the next request
+            params['offset'] = offset + limit
+
+        return stitched_data
 
     def get_json_records_by_year(self, station_id, year):
         data_type_id = DATA_TYPES_ID

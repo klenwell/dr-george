@@ -114,7 +114,7 @@ class WeatherStation:
         return sorted_reports[0]
 
     def json_path_by_year(self, year):
-        return f'{DATA_ROOT}/noaa/json/{self.noaa_id}-{year}.json'
+        return f'{DATA_ROOT}/noaa/{self.id_key}/{self.noaa_id}-{year}.json'
 
     def json_zpath_by_year(self, year):
         return f'{self.json_path_by_year(year)}.gz'
