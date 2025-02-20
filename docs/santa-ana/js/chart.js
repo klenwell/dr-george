@@ -14,6 +14,7 @@ class HistoricalTempChart {
     constructor(config) {
       this.config = config
       this.dateTime = luxon.DateTime
+      this.chart = new Chart(this.canvas, this.chartConfig)
     }
 
     /*
@@ -99,43 +100,44 @@ class HistoricalTempChart {
     /*
      * Methods
     **/
-    render() {
-      let chart = new Chart(this.canvas, this.chartConfig);
-      let models = {};
+    async render() {
+      await Promise.all(
+        this.years.map(async (year) => {
+          let model = new AnnualStationData(year);
+          await model.fetchData();
+          await this.pushDataset(model, chart);
+        })
+      );
 
-      this.years.forEach(async (year) => {
-        //if ( year > 2000 ) { return; };
-        let model = new AnnualStationData(year);
-        await model.fetchData();
-        await this.renderYear(model, chart);
-        //models[year] = model;
-      });
+      chart.update();
+      return this;
     }
 
-    async renderYear(model, chart) {
+    async pushDataset(model, chart) {
       const minHex = '0088ff';
       const maxHex = 'ff8800'
+      const opHex = '22'
 
-      let lineOp = this.opacityByYear(model.year);
-      let minColor = `#${minHex}${lineOp}`;
-      let maxColor = `#${maxHex}${lineOp}`;
+      let minColor = `#${minHex}${opHex}`;
+      let maxColor = `#${maxHex}${opHex}`;
       let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, minColor);
       let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, maxColor);
 
       chart.data.datasets.push(minDataSet);
       chart.data.datasets.push(maxDataSet);
-      chart.update();
     }
 
-    opacityByYear(year) {
+    opHexByYear(year) {
       const opMin = 20;
       const opMax = 80;
       const opRange = opMax - opMin;
       const yearRange = this.thisYear - this.config.startYear;
       const yearIdx = year - this.config.startYear;
       const yearQuot = yearIdx / yearRange;
-      const opIdx = yearQuot * opRange;
-      return Math.round(opMin + opIdx);
+      const opIdx = (yearQuot * opRange) + opMin;
+      const decimal = opIdx / 100;
+      const hexValue = Math.round(decimal * 255).toString(16);
+      return hexValue.length === 1 ? "0" + hexValue : hexValue;
     }
 
     toDataset(data, label, color) {
