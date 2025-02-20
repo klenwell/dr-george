@@ -105,26 +105,26 @@ class HistoricalTempChart {
         this.years.map(async (year) => {
           let model = new AnnualStationData(year);
           await model.fetchData();
-          await this.pushDataset(model, chart);
+          await this.pushDataset(model);
         })
       );
 
-      chart.update();
+      this.chart.update();
       return this;
     }
 
-    async pushDataset(model, chart) {
-      const minHex = '0088ff';
+    async pushDataset(model) {
+      const minHex = '99ccff';
       const maxHex = 'ff8800'
-      const opHex = '22'
+      const opHex = '33'
 
       let minColor = `#${minHex}${opHex}`;
       let maxColor = `#${maxHex}${opHex}`;
       let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, minColor);
       let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, maxColor);
 
-      chart.data.datasets.push(minDataSet);
-      chart.data.datasets.push(maxDataSet);
+      this.chart.data.datasets.push(minDataSet);
+      this.chart.data.datasets.push(maxDataSet);
     }
 
     opHexByYear(year) {
