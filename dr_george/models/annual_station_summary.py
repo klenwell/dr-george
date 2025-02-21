@@ -25,6 +25,14 @@ class AnnualStationSummary:
         return self.json_data['results']
 
     @cached_property
+    def dates(self):
+        dates = []
+        for day_num in abs_day_nums_in_year():
+            dated = abs_day_num_to_date(self.year, day_num)
+            dates.append(dated)
+        return dates
+
+    @cached_property
     def max_temp_records(self):
         return self.extract_records_by_datatype('TMAX')
 
@@ -63,8 +71,7 @@ class AnnualStationSummary:
     @cached_property
     def daily_reports(self):
         reports = []
-        for day_num in abs_day_nums_in_year():
-            dated = abs_day_num_to_date(self.year, day_num)
+        for dated in self.dates:
             max_temp = self.dated_max_temps.get(dated)
             min_temp = self.dated_min_temps.get(dated)
             precip = self.dated_precipitation.get(dated)
