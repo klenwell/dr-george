@@ -16,7 +16,7 @@ class HistoricalTempChart {
       this.dateTime = luxon.DateTime;
       this.chart = new Chart(this.canvas, this.chartConfig);
       this.datasetsByYear = {};
-      this.highlightedDataset = null;
+      this.highlightedDatasets = [];
       this.highlightIndex = 0;
     }
 
@@ -56,43 +56,6 @@ class HistoricalTempChart {
           }
         }
       }
-    }
-
-    onHover(event, elements) {
-      if (!elements.length) {
-        return;
-      }
-
-      const datasetIndex = elements[0].datasetIndex;
-      const dataset = this.chart.data.datasets[datasetIndex];
-      this.highlightDataset(dataset);
-    }
-
-    highlightDataset(dataset) {
-      const colorMap = {
-        'min': this.colors.minHighlight,
-        'max': this.colors.maxHighlight
-      }
-
-      const color = colorMap[dataset.extremity]
-      this.highlightIndex--;
-      console.log('un/highlight', this.highlightedDataset, dataset);
-
-      this.unhighlightDataset(this.highlightedDataset);
-      dataset.oldColor = dataset.borderColor;
-      dataset.borderColor = color;
-      dataset.order = this.highlightIndex;
-      this.highlightedDataset = dataset;
-      this.chart.update();
-    }
-
-    unhighlightDataset(dataset) {
-      if ( ! dataset ) {
-        return;
-      }
-
-      dataset.borderColor = dataset.oldColor;
-      this.highlightedDataset = null;
     }
 
     get xTicks() {
@@ -145,7 +108,7 @@ class HistoricalTempChart {
       return this.dayNums.map((dayNum) => {
         let date = dayZero.plus({days: dayNum});
         //let label = (date.day === 1) ? date.monthShort : `${date.month}/${date.day}`;
-        let label = `${date.month}/${date.day}`;
+        let label = `${date.monthShort} ${date.day}`;
         return label;
       });
     }
@@ -160,7 +123,7 @@ class HistoricalTempChart {
     }
 
     /*
-     * Methods
+     * Async Methods
     **/
     async render() {
       await Promise.all(
@@ -174,11 +137,6 @@ class HistoricalTempChart {
       this.chart.update();
     }
 
-    highlightYear(year) {
-      const datasets = this.datasetsByYear[year];
-      console.log('highlightYear', year, datasets);
-    }
-
     async pushDataset(model) {
       const minDataSet = this.toDataset(model, 'min');
       const maxDataSet = this.toDataset(model, 'max');
@@ -186,6 +144,62 @@ class HistoricalTempChart {
       this.chart.data.datasets.push(minDataSet);
       this.chart.data.datasets.push(maxDataSet);
       this.datasetsByYear[model.year] = [minDataSet, maxDataSet];
+    }
+
+    /*
+     * Methods
+    **/
+    onHover(event, elements) {
+      if (!elements.length) {
+        return;
+      }
+
+      const datasetIndex = elements[0].datasetIndex;
+      const year = this.chart.data.datasets[datasetIndex].year;
+      this.highlightYear(year);
+
+      // Custom event that can be used to make other updates (like with dropdown)
+      $(document).trigger("yearHover", [year]);
+    }
+
+    highlightYear(year) {
+      const datasets = this.datasetsByYear[year];
+      this.unhighlightYear(year);
+      this.highlightDataset(datasets[0]);
+      this.highlightDataset(datasets[1]);
+      this.chart.update();
+    }
+
+    unhighlightYear(year) {
+      this.highlightedDatasets.forEach((dataset) => {
+        this.unhighlightDataset(dataset);
+      });
+
+      this.highlightedDatasets = [];
+    }
+
+    highlightDataset(dataset) {
+      const colorMap = {
+        'min': this.colors.minHighlight,
+        'max': this.colors.maxHighlight
+      }
+      const color = colorMap[dataset.extremity];
+
+      dataset.oldColor = dataset.borderColor;
+      dataset.borderColor = color;
+      dataset.order = this.highlightIndex;
+
+      this.highlightIndex--;
+      this.highlightedDatasets.push(dataset);
+    }
+
+    unhighlightDataset(dataset) {
+      if ( ! dataset ) {
+        return;
+      }
+
+      dataset.borderColor = dataset.oldColor;
+      this.highlightedDataset = null;
     }
 
     toDataset(model, extremity) {
@@ -202,6 +216,7 @@ class HistoricalTempChart {
         data: data,
         label: label,
         borderColor: color,
+        year: model.year,
         extremity: extremity,
         fill: false,
         borderWidth: 1,
@@ -234,6 +249,5 @@ $(document).ready(async () => {
   await chart.render();
 
   const yearSelector = new YearSelector(chart);
-  console.log('chart rendered', yearSelector);
   yearSelector.populate();
 });
