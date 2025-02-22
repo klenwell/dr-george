@@ -46,7 +46,6 @@ class YearSelector {
   }
 
   onYearHover(year) {
-    console.log('onYearHover', year);
     this.selector.val(year).trigger('change');
   }
 }

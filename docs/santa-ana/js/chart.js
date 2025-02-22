@@ -107,7 +107,6 @@ class HistoricalTempChart {
       const dayZero = this.dateTime.local(2019, 12, 31);
       return this.dayNums.map((dayNum) => {
         let date = dayZero.plus({days: dayNum});
-        //let label = (date.day === 1) ? date.monthShort : `${date.month}/${date.day}`;
         let label = `${date.monthShort} ${date.day}`;
         return label;
       });
@@ -211,6 +210,7 @@ class HistoricalTempChart {
       const data = typeMap[extremity][0];
       const label = typeMap[extremity][1];
       const color = typeMap[extremity][2];
+      const order = this.thisYear - model.year;
 
       return {
         data: data,
@@ -218,6 +218,7 @@ class HistoricalTempChart {
         borderColor: color,
         year: model.year,
         extremity: extremity,
+        order: order,
         fill: false,
         borderWidth: 1,
         pointRadius: 1,
