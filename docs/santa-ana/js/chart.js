@@ -12,9 +12,10 @@ const HistoricalTempChartConfig = {
 
 class HistoricalTempChart {
     constructor(config) {
-      this.config = config
-      this.dateTime = luxon.DateTime
-      this.chart = new Chart(this.canvas, this.chartConfig)
+      this.config = config;
+      this.dateTime = luxon.DateTime;
+      this.chart = new Chart(this.canvas, this.chartConfig);
+      this.highlightedDataset = null;
     }
 
     /*
@@ -34,6 +35,7 @@ class HistoricalTempChart {
         },
         options: {
           animation: false,
+          onHover: (e, els) => this.onHover(e, els),
           plugins: {
             legend: {
                 display: false,
@@ -41,23 +43,8 @@ class HistoricalTempChart {
           },
           scales: {
             x: {
-              ticks: {
-                autoSkip: false,
-                callback: function(value, index, values) {
-                  const dayZero = luxon.DateTime.local(2019, 12, 31);
-                  let date = dayZero.plus({days: index});
-                  return (date.day === 1) ? date.monthShort : '';
-                }
-              },
-              grid: {
-                display: true,
-                drawTicks: true,
-                color: function(context) {
-                  const gray = 'rgba(200, 200, 200, 0.8)';
-                  let tickColor = context.tick.label === '' ? 'transparent' : gray;
-                  return tickColor;
-                }
-              }
+              ticks: this.xTicks,
+              grid: this.xGrid
             },
             y: {
               type: 'linear',
@@ -66,6 +53,61 @@ class HistoricalTempChart {
             }
           }
         }
+      }
+    }
+
+    onHover(event, elements) {
+      if (!elements.length) {
+        return;
+      }
+
+      const datasetIndex = elements[0].datasetIndex;
+      const dataset = this.chart.data.datasets[datasetIndex];
+      this.highlightDataset(dataset);
+    }
+
+    highlightDataset(dataset) {
+      console.log('un/highlight', this.highlightedDataset, dataset);
+      this.unhighlightDataset(this.highlightedDataset);
+      dataset.oldColor = dataset.borderColor;
+      dataset.borderColor = 'red';
+      this.highlightedDataset = dataset;
+      this.chart.update();
+    }
+
+    unhighlightDataset(dataset) {
+      if ( ! dataset ) {
+        return;
+      }
+
+      dataset.borderColor = dataset.oldColor;
+      this.highlightedDataset = null;
+    }
+
+    get xTicks() {
+      const tickText = (value, index, values) => {
+        const dayZero = luxon.DateTime.local(2019, 12, 31);
+          let date = dayZero.plus({days: index});
+          return (date.day === 1) ? date.monthShort : '';
+      };
+
+      return {
+        autoSkip: false,
+        callback: (value, index, values) => tickText(value, index, values)
+      }
+    }
+
+    get xGrid() {
+      const gray = '#c8c8c8';
+      const tickColor = (context) => {
+        let color = context.tick.label === '' ? 'transparent' : gray;
+        return color;
+      };
+
+      return {
+        display: true,
+        drawTicks: true,
+        color: (context) => tickColor(context)
       }
     }
 
