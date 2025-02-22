@@ -16,6 +16,7 @@ class HistoricalTempChart {
       this.dateTime = luxon.DateTime;
       this.chart = new Chart(this.canvas, this.chartConfig);
       this.highlightedDataset = null;
+      this.highlightIndex = 0;
     }
 
     /*
@@ -67,10 +68,19 @@ class HistoricalTempChart {
     }
 
     highlightDataset(dataset) {
+      const colorMap = {
+        'min': this.colors.minHighlight,
+        'max': this.colors.maxHighlight
+      }
+
+      const color = colorMap[dataset.extremity]
+      this.highlightIndex--;
       console.log('un/highlight', this.highlightedDataset, dataset);
+
       this.unhighlightDataset(this.highlightedDataset);
       dataset.oldColor = dataset.borderColor;
-      dataset.borderColor = 'red';
+      dataset.borderColor = color;
+      dataset.order = this.highlightIndex;
       this.highlightedDataset = dataset;
       this.chart.update();
     }
@@ -139,6 +149,15 @@ class HistoricalTempChart {
       });
     }
 
+    get colors() {
+      return {
+        min: '#99ccff33',
+        minHighlight: '#0066ffff',
+        max: '#ff880033',
+        maxHighlight: '#bb6600ff'
+      }
+    }
+
     /*
      * Methods
     **/
@@ -156,17 +175,34 @@ class HistoricalTempChart {
     }
 
     async pushDataset(model) {
-      const minHex = '99ccff';
-      const maxHex = 'ff8800'
-      const opHex = '33'
-
-      let minColor = `#${minHex}${opHex}`;
-      let maxColor = `#${maxHex}${opHex}`;
-      let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, minColor);
-      let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, maxColor);
+      const minDataSet = this.toDataset(model, 'min');
+      const maxDataSet = this.toDataset(model, 'max');
 
       this.chart.data.datasets.push(minDataSet);
       this.chart.data.datasets.push(maxDataSet);
+    }
+
+    toDataset(model, extremity) {
+      const typeMap = {
+        'min': [model.minTemps, `Min ${model.year}`, this.colors.min],
+        'max': [model.maxTemps, `Max ${model.year}`, this.colors.max]
+      }
+
+      const data = typeMap[extremity][0];
+      const label = typeMap[extremity][1];
+      const color = typeMap[extremity][2];
+
+      return {
+        data: data,
+        label: label,
+        borderColor: color,
+        extremity: extremity,
+        fill: false,
+        borderWidth: 1,
+        pointRadius: 1,
+        pointHitRadius: 3,
+        tension: 0.5
+      }
     }
 
     opHexByYear(year) {
@@ -180,18 +216,6 @@ class HistoricalTempChart {
       const decimal = opIdx / 100;
       const hexValue = Math.round(decimal * 255).toString(16);
       return hexValue.length === 1 ? "0" + hexValue : hexValue;
-    }
-
-    toDataset(data, label, color) {
-      return {
-        label: label,
-        fill: false,
-        borderWidth: 1,
-        borderColor: color,
-        pointRadius: 1,
-        data: data,
-        tension: 0.5
-      }
     }
   }
 
