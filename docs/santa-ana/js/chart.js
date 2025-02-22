@@ -15,6 +15,7 @@ class HistoricalTempChart {
       this.config = config;
       this.dateTime = luxon.DateTime;
       this.chart = new Chart(this.canvas, this.chartConfig);
+      this.datasetsByYear = {};
       this.highlightedDataset = null;
       this.highlightIndex = 0;
     }
@@ -171,7 +172,11 @@ class HistoricalTempChart {
       );
 
       this.chart.update();
-      return this;
+    }
+
+    highlightYear(year) {
+      const datasets = this.datasetsByYear[year];
+      console.log('highlightYear', year, datasets);
     }
 
     async pushDataset(model) {
@@ -180,6 +185,7 @@ class HistoricalTempChart {
 
       this.chart.data.datasets.push(minDataSet);
       this.chart.data.datasets.push(maxDataSet);
+      this.datasetsByYear[model.year] = [minDataSet, maxDataSet];
     }
 
     toDataset(model, extremity) {
@@ -220,10 +226,14 @@ class HistoricalTempChart {
   }
 
 
-  /*
-   * Main block: these are the things that happen on designated event.
-  **/
-  $(document).ready(() => {
-    const chart = new HistoricalTempChart(HistoricalTempChartConfig)
-    chart.render()
-  })
+/*
+  * Main block: these are the things that happen on designated event.
+**/
+$(document).ready(async () => {
+  const chart = new HistoricalTempChart(HistoricalTempChartConfig);
+  await chart.render();
+
+  const yearSelector = new YearSelector(chart);
+  console.log('chart rendered', yearSelector);
+  yearSelector.populate();
+});

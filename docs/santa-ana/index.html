@@ -53,7 +53,13 @@
 
       <main>
         <section class="chart">
-          <h3 class="mt-5">Santa Ana Fire Station &bull; USC00047888</h3>
+          <header>
+            <h3 class="mt-5">Santa Ana Fire Station &bull; USC00047888</h3>
+            <div>
+              <label for="yearSelector">Select a Year:</label>
+              <select id="yearSelector"></select>
+            </div>
+          </header>
           <div class="chart-block mt-1">
             <canvas id="chart"></canvas>
           </div>
@@ -104,6 +110,7 @@
 
     <!-- Components -->
     <script src="js/annual-station-data.js"></script>
+    <script src="js/year-selector.js"></script>
     <script src="js/chart.js"></script>
   </body>
 </html>
