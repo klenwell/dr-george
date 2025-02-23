@@ -60,7 +60,7 @@ class HistoricalTempChart {
 
     get xTicks() {
       const tickText = (value, index, values) => {
-        const dayZero = luxon.DateTime.local(2019, 12, 31);
+        const dayZero = luxon.DateTime.local(2020, 1, 1);
           let date = dayZero.plus({days: index});
           return (date.day === 1) ? date.monthShort : '';
       };
