@@ -35,9 +35,8 @@ class YearSelector {
 
   onChange(event) {
     const selectedYear = $(event.target).val();
-    console.log('selected', selectedYear);
 
-    // Null Value
+    // User could select first label value
     if ( !selectedYear) {
       return;
     }
