@@ -67,7 +67,8 @@ class HistoricalTempChart {
       return chart.data.datasets.map((dataset, index) => ({
         text: labelTextMap[dataset.label],
         strokeStyle: dataset.borderColor,
-        fillStyle: dataset.borderColor
+        fillStyle: dataset.borderColor,
+        datasetIndex: index
       }));
     }
 
@@ -137,9 +138,9 @@ class HistoricalTempChart {
 
   get colors() {
     return {
-      min: '#99ccff33',
-      minHighlight: '#0066ffff',
-      minMeanHighlight: '#004d9933',
+      min: '#A3D5FF33',
+      minHighlight: '#0077CCFF',
+      minMeanHighlight: '#005A99CC',
       max: '#ff880033',
       maxHighlight: '#bb6600ff',
       maxMeanHighlight: '#b35f00cc'
@@ -151,13 +152,16 @@ class HistoricalTempChart {
   **/
   async render() {
     const years = this.years.concat(['mean']);
-    console.log(years)
+    const jsChart = this.chart;
 
     await Promise.all(
       years.map(async (year) => {
         let model = new AnnualStationData(year);
         await model.fetchData();
         await this.pushDataset(model);
+        if ( year % 10 == 1 ) {
+          jsChart.update();
+        }
       })
     );
 
