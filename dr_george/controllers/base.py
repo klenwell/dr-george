@@ -60,7 +60,6 @@ class Base(Controller):
                         raise Exception('Server is hosed: Try again later.')
                     time.sleep(1)
 
-
     # To run: python -m dr_george.main test-download
     @ex(help="Download a single year to sanity check download action.")
     def test_download(self):
@@ -85,6 +84,9 @@ class Base(Controller):
         for year in range(station.start_year, station.end_year+1, 1):
             fpath = station.export_summary_to_json(year)
             print(f"Exported {year}: {fpath}")
+
+        fpath = station.export_means_to_json()
+        print(f"Export means: {fpath}")
 
     # To run: python -m dr_george.main analyze
     @ex(help="Run analysis.")

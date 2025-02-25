@@ -9,7 +9,8 @@ from ..config.noaa import STATIONS
 from ..config.secrets import NOAA_API_TOKEN
 from ..config.app import DATA_ROOT, GH_PAGES_ROOT, path_join
 from ..adapters.noaa import NoaaAdapter
-from ..models.annual_station_summary import AnnualStationSummary
+from ..models.annual_station_summary import AnnualStationSummary, DailyStationSummary
+from ..libs.calendar import abs_day_nums_in_year, abs_day_num_to_date
 
 
 class WeatherStation:
@@ -42,6 +43,14 @@ class WeatherStation:
         return range(self.start_year, self.end_year+1)
 
     @cached_property
+    def dates(self):
+        dates = []
+        for day_num in abs_day_nums_in_year():
+            dated = abs_day_num_to_date(self.year, day_num)
+            dates.append(dated)
+        return dates
+
+    @cached_property
     def annual_summaries_by_year(self):
         summaries_map = {}
         for year in self.years:
@@ -53,10 +62,22 @@ class WeatherStation:
     def annual_summaries(self):
         return sorted(self.annual_summaries_by_year.values(), key=lambda s: s.year)
 
+    @cached_property
+    def daily_mean_reports(self):
+        reports = []
+        for day_num in abs_day_nums_in_year():
+            max_temp = self.avg_max_temp_by_doy(day_num)
+            min_temp = self.avg_min_temp_by_doy(day_num)
+            precip = self.avg_rain_by_doy(day_num)
+            dated = abs_day_num_to_date(self.end_year, day_num)
+            report = DailyStationSummary(self, dated, max_temp, min_temp, precip)
+            reports.append(report)
+        return reports
+
     def download_noaa_data_by_year(self, year):
         zpath = self.json_zpath_by_year(year)
 
-        if os.path.exists(zpath):
+        if os.path.exists(zpath) and year != self.end_year:
             print(f"{year}: {zpath} exists")
             return self.json_records_by_year(year)
         else:
@@ -84,6 +105,23 @@ class WeatherStation:
 
         return json_path
 
+    def export_means_to_json(self):
+        json_file = f"{self.noaa_id}-mean.json"
+        pages_sub_dir = self.id_key.replace("_", "-")
+        json_path = path_join(GH_PAGES_ROOT, pages_sub_dir, 'data', json_file)
+
+        json_data = {
+            'noaa_id': self.noaa_id,
+            'year': 'mean',
+            'daily': [dr.to_dict() for dr in self.daily_mean_reports]
+        }
+
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, ensure_ascii=False, indent=2)
+
+        return json_path
+
+
     def daily_summaries_by_doy(self, day_of_year):
         daily_summaries = []
         for annual_summary in self.annual_summaries:
@@ -106,6 +144,16 @@ class WeatherStation:
         valid_reports = [report for report in daily_reports if report.max_temp != None]
         sorted_reports = sorted(valid_reports, key=lambda r: (r.max_temp, r.year), reverse=True)
         return sorted_reports[0]
+
+    def avg_min_temp_by_doy(self, day_of_year):
+        daily_reports = self.daily_summaries_by_doy(day_of_year)
+        max_temps = [report.min_temp for report in daily_reports if report.min_temp != None]
+        return statistics.mean(max_temps)
+
+    def avg_rain_by_doy(self, day_of_year):
+        daily_reports = self.daily_summaries_by_doy(day_of_year)
+        rain_amts = [dr.precipitation for dr in daily_reports if dr.precipitation != None]
+        return statistics.mean(rain_amts)
 
     def max_rain_by_year(self, year):
         summary = self.annual_summaries_by_year[year]

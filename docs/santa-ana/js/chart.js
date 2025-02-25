@@ -6,158 +6,289 @@
 **/
 const HistoricalTempChartConfig = {
   selector: 'canvas#chart',
-  startYear: 1917
+  startYear: 1917,
+  colors: {
+    min: '#A3D5FF33',
+    minHighlight: '#0077CCFF',
+    minMeanHighlight: '#005A99CC',
+    max: '#ff880033',
+    maxHighlight: '#bb6600ff',
+    maxMeanHighlight: '#b35f00cc'
+  }
 }
 
 
 class HistoricalTempChart {
-    constructor(config) {
-      this.config = config
-      this.dateTime = luxon.DateTime
-      this.chart = new Chart(this.canvas, this.chartConfig)
-    }
+  constructor(config) {
+    this.config = config;
+    this.dateTime = luxon.DateTime;
+    this.chart = new Chart(this.canvas, this.chartConfig);
+    this.datasetsByYear = {};
+    this.highlightedDatasets = [];
+    this.highlightIndex = 0;
+  }
 
-    /*
-     * Getters
-    **/
-    get canvas() {
-      return $(this.config.selector)
-    }
+  /*
+   * Getters
+  **/
+  get canvas() {
+    return $(this.config.selector)
+  }
 
-    // Refer: https://stackoverflow.com/a/48143738/1093087
-    get chartConfig() {
-      return {
-        type: 'line',
-        data: {
-          labels: this.labels,
-          datasets: []
+  // Refer: https://stackoverflow.com/a/48143738/1093087
+  get chartConfig() {
+    return {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: []
+      },
+      options: {
+        animation: false,
+        onHover: (e, els) => this.onHover(e, els),
+        plugins: {
+          legend: this.legend
         },
-        options: {
-          animation: false,
-          plugins: {
-            legend: {
-                display: false,
-            }
+        scales: {
+          x: {
+            ticks: this.xTicks,
+            grid: this.xGrid
           },
-          scales: {
-            x: {
-              ticks: {
-                autoSkip: false,
-                callback: function(value, index, values) {
-                  const dayZero = luxon.DateTime.local(2019, 12, 31);
-                  let date = dayZero.plus({days: index});
-                  return (date.day === 1) ? date.monthShort : '';
-                }
-              },
-              grid: {
-                display: true,
-                drawTicks: true,
-                color: function(context) {
-                  const gray = 'rgba(200, 200, 200, 0.8)';
-                  let tickColor = context.tick.label === '' ? 'transparent' : gray;
-                  return tickColor;
-                }
-              }
-            },
-            y: {
-              type: 'linear',
-              min: 20,
-              max: 120
-            }
+          y: {
+            type: 'linear',
+            min: 20,
+            max: 120
           }
         }
       }
     }
+  }
 
-    get years() {
-      const startYear = this.config.startYear;
-      const endYear = this.thisYear;
-      return Array.from(
-        { length: (endYear - startYear) + 1 },
-        (_, index) => startYear + index
-      );
+  get legend() {
+    const labelTextMap = {
+      'Min mean': 'Average Mins',
+      'Max mean': 'Average Maxes'
+    }
+    const displayedLabels = Object.values(labelTextMap);
+
+    const generateLabels = (chart) => {
+      return chart.data.datasets.map((dataset, index) => ({
+        text: labelTextMap[dataset.label],
+        strokeStyle: dataset.borderColor,
+        fillStyle: dataset.borderColor,
+        datasetIndex: index
+      }));
     }
 
-    get thisYear() {
-      return this.dateTime.now().year;
-    }
-
-    get dayNums() {
-      return Array.from(Array(366).keys()).map((n) => { return n+1 })
-    }
-
-    get labels() {
-      // Make sure we're counting against a leap year
-      const dayZero = this.dateTime.local(2019, 12, 31);
-      return this.dayNums.map((dayNum) => {
-        let date = dayZero.plus({days: dayNum});
-        //let label = (date.day === 1) ? date.monthShort : `${date.month}/${date.day}`;
-        let label = `${date.month}/${date.day}`;
-        return label;
-      });
-    }
-
-    /*
-     * Methods
-    **/
-    async render() {
-      await Promise.all(
-        this.years.map(async (year) => {
-          let model = new AnnualStationData(year);
-          await model.fetchData();
-          await this.pushDataset(model);
-        })
-      );
-
-      this.chart.update();
-      return this;
-    }
-
-    async pushDataset(model) {
-      const minHex = '99ccff';
-      const maxHex = 'ff8800'
-      const opHex = '33'
-
-      let minColor = `#${minHex}${opHex}`;
-      let maxColor = `#${maxHex}${opHex}`;
-      let minDataSet = this.toDataset(model.minTemps, `Min ${model.year}`, minColor);
-      let maxDataSet = this.toDataset(model.maxTemps, `Max ${model.year}`, maxColor);
-
-      this.chart.data.datasets.push(minDataSet);
-      this.chart.data.datasets.push(maxDataSet);
-    }
-
-    opHexByYear(year) {
-      const opMin = 20;
-      const opMax = 80;
-      const opRange = opMax - opMin;
-      const yearRange = this.thisYear - this.config.startYear;
-      const yearIdx = year - this.config.startYear;
-      const yearQuot = yearIdx / yearRange;
-      const opIdx = (yearQuot * opRange) + opMin;
-      const decimal = opIdx / 100;
-      const hexValue = Math.round(decimal * 255).toString(16);
-      return hexValue.length === 1 ? "0" + hexValue : hexValue;
-    }
-
-    toDataset(data, label, color) {
-      return {
-        label: label,
-        fill: false,
-        borderWidth: 1,
-        borderColor: color,
-        pointRadius: 1,
-        data: data,
-        tension: 0.5
+    return {
+      display: true,
+      labels: {
+        usePointStyle: true,
+        generateLabels: (chart) => generateLabels(chart),
+        filter: (legendItem, chartData) => displayedLabels.includes(legendItem.text)
       }
     }
   }
 
+  get xTicks() {
+    const tickText = (value, index, values) => {
+      const dayZero = luxon.DateTime.local(2020, 1, 1);
+      let date = dayZero.plus({ days: index });
+      return (date.day === 1) ? date.monthShort : '';
+    };
+
+    return {
+      autoSkip: false,
+      callback: (value, index, values) => tickText(value, index, values)
+    }
+  }
+
+  get xGrid() {
+    const gray = '#c8c8c8';
+    const tickColor = (context) => {
+      let color = context.tick.label === '' ? 'transparent' : gray;
+      return color;
+    };
+
+    return {
+      display: true,
+      drawTicks: true,
+      color: (context) => tickColor(context)
+    }
+  }
+
+  get years() {
+    const startYear = this.config.startYear;
+    const endYear = this.thisYear;
+    return Array.from(
+      { length: (endYear - startYear) + 1 },
+      (_, index) => startYear + index
+    );
+  }
+
+  get thisYear() {
+    return this.dateTime.now().year;
+  }
+
+  get dayNums() {
+    return Array.from(Array(366).keys()).map((n) => { return n + 1 })
+  }
+
+  get labels() {
+    // Make sure we're counting against a leap year
+    const dayZero = this.dateTime.local(2019, 12, 31);
+    return this.dayNums.map((dayNum) => {
+      let date = dayZero.plus({ days: dayNum });
+      let label = `${date.monthShort} ${date.day}`;
+      return label;
+    });
+  }
 
   /*
-   * Main block: these are the things that happen on designated event.
+   * Async Methods
   **/
-  $(document).ready(() => {
-    const chart = new HistoricalTempChart(HistoricalTempChartConfig)
-    chart.render()
-  })
+  async render() {
+    const years = this.years.concat(['mean']);
+    const jsChart = this.chart;
+
+    await Promise.all(
+      years.map(async (year) => {
+        let model = new AnnualStationData(year);
+        await model.fetchData();
+        await this.pushDataset(model);
+        if ( year % 10 == 1 ) {
+          jsChart.update();
+        }
+      })
+    );
+
+    this.highlightMeans();
+    this.chart.update();
+  }
+
+  async pushDataset(model) {
+    const minDataSet = this.toDataset(model, 'min');
+    const maxDataSet = this.toDataset(model, 'max');
+
+    this.chart.data.datasets.push(minDataSet);
+    this.chart.data.datasets.push(maxDataSet);
+    this.datasetsByYear[model.year] = [minDataSet, maxDataSet];
+  }
+
+  /*
+   * Methods
+  **/
+  onHover(event, elements) {
+    if ( !elements.length ) return;
+
+    const datasetIndex = elements[0].datasetIndex;
+    const year = this.chart.data.datasets[datasetIndex].year;
+    this.highlightYear(year);
+
+    // Custom event that can be used to make other updates (like with dropdown)
+    $(document).trigger("yearHover", [year]);
+  }
+
+  highlightYear(year) {
+    const datasets = this.datasetsByYear[year];
+    this.unhighlightYear(year);
+    this.highlightDataset(datasets[0]);
+    this.highlightDataset(datasets[1]);
+    this.chart.update();
+  }
+
+  unhighlightYear(year) {
+    this.highlightedDatasets.forEach((dataset) => {
+      this.unhighlightDataset(dataset);
+    });
+
+    this.highlightedDatasets = [];
+  }
+
+  highlightDataset(dataset) {
+    const colorMap = {
+      'min': this.config.colors.minHighlight,
+      'max': this.config.colors.maxHighlight
+    }
+    const color = colorMap[dataset.extremity];
+
+    dataset.oldColor = dataset.borderColor;
+    dataset.borderColor = color;
+    dataset.order = this.highlightIndex;
+
+    this.highlightIndex--;
+    this.highlightedDatasets.push(dataset);
+  }
+
+  unhighlightDataset(dataset) {
+    if ( !dataset ) return
+
+    dataset.borderColor = dataset.oldColor;
+    this.highlightedDataset = null;
+  }
+
+  highlightMeans() {
+    const [minDataset, maxDataset] = this.datasetsByYear['mean']
+
+    // Min
+    minDataset.borderColor = this.config.colors.minMeanHighlight;
+    minDataset.borderWidth = 2;
+    minDataset.order = -1000;
+
+    // Max
+    maxDataset.borderColor = this.config.colors.maxMeanHighlight;
+    maxDataset.borderWidth = 2;
+    maxDataset.order = -1000;
+  }
+
+  toDataset(model, extremity) {
+    const typeMap = {
+      'min': [model.minTemps, `Min ${model.year}`, this.config.colors.min],
+      'max': [model.maxTemps, `Max ${model.year}`, this.config.colors.max]
+    }
+
+    const data = typeMap[extremity][0];
+    const label = typeMap[extremity][1];
+    const color = typeMap[extremity][2];
+    const order = this.thisYear - model.year;
+
+    return {
+      data: data,
+      label: label,
+      borderColor: color,
+      year: model.year,
+      extremity: extremity,
+      order: order,
+      fill: false,
+      borderWidth: 1,
+      pointRadius: 1,
+      pointHitRadius: 3,
+      tension: 0.5
+    }
+  }
+
+  opHexByYear(year) {
+    const opMin = 20;
+    const opMax = 80;
+    const opRange = opMax - opMin;
+    const yearRange = this.thisYear - this.config.startYear;
+    const yearIdx = year - this.config.startYear;
+    const yearQuot = yearIdx / yearRange;
+    const opIdx = (yearQuot * opRange) + opMin;
+    const decimal = opIdx / 100;
+    const hexValue = Math.round(decimal * 255).toString(16);
+    return hexValue.length === 1 ? "0" + hexValue : hexValue;
+  }
+}
+
+
+/*
+ * Main block
+**/
+$(document).ready(async () => {
+  const chart = new HistoricalTempChart(HistoricalTempChartConfig);
+  await chart.render();
+
+  const yearSelector = new YearSelector(chart);
+  yearSelector.populate();
+});
