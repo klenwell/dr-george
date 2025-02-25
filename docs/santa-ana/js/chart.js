@@ -6,7 +6,15 @@
 **/
 const HistoricalTempChartConfig = {
   selector: 'canvas#chart',
-  startYear: 1917
+  startYear: 1917,
+  colors: {
+    min: '#A3D5FF33',
+    minHighlight: '#0077CCFF',
+    minMeanHighlight: '#005A99CC',
+    max: '#ff880033',
+    maxHighlight: '#bb6600ff',
+    maxMeanHighlight: '#b35f00cc'
+  }
 }
 
 
@@ -136,17 +144,6 @@ class HistoricalTempChart {
     });
   }
 
-  get colors() {
-    return {
-      min: '#A3D5FF33',
-      minHighlight: '#0077CCFF',
-      minMeanHighlight: '#005A99CC',
-      max: '#ff880033',
-      maxHighlight: '#bb6600ff',
-      maxMeanHighlight: '#b35f00cc'
-    }
-  }
-
   /*
    * Async Methods
   **/
@@ -182,9 +179,7 @@ class HistoricalTempChart {
    * Methods
   **/
   onHover(event, elements) {
-    if (!elements.length) {
-      return;
-    }
+    if ( !elements.length ) return;
 
     const datasetIndex = elements[0].datasetIndex;
     const year = this.chart.data.datasets[datasetIndex].year;
@@ -212,8 +207,8 @@ class HistoricalTempChart {
 
   highlightDataset(dataset) {
     const colorMap = {
-      'min': this.colors.minHighlight,
-      'max': this.colors.maxHighlight
+      'min': this.config.colors.minHighlight,
+      'max': this.config.colors.maxHighlight
     }
     const color = colorMap[dataset.extremity];
 
@@ -226,9 +221,7 @@ class HistoricalTempChart {
   }
 
   unhighlightDataset(dataset) {
-    if (!dataset) {
-      return;
-    }
+    if ( !dataset ) return
 
     dataset.borderColor = dataset.oldColor;
     this.highlightedDataset = null;
@@ -238,20 +231,20 @@ class HistoricalTempChart {
     const [minDataset, maxDataset] = this.datasetsByYear['mean']
 
     // Min
-    minDataset.borderColor = this.colors.minMeanHighlight;
+    minDataset.borderColor = this.config.colors.minMeanHighlight;
     minDataset.borderWidth = 2;
     minDataset.order = -1000;
 
     // Max
-    maxDataset.borderColor = this.colors.maxMeanHighlight;
+    maxDataset.borderColor = this.config.colors.maxMeanHighlight;
     maxDataset.borderWidth = 2;
     maxDataset.order = -1000;
   }
 
   toDataset(model, extremity) {
     const typeMap = {
-      'min': [model.minTemps, `Min ${model.year}`, this.colors.min],
-      'max': [model.maxTemps, `Max ${model.year}`, this.colors.max]
+      'min': [model.minTemps, `Min ${model.year}`, this.config.colors.min],
+      'max': [model.maxTemps, `Max ${model.year}`, this.config.colors.max]
     }
 
     const data = typeMap[extremity][0];
@@ -290,7 +283,7 @@ class HistoricalTempChart {
 
 
 /*
-  * Main block: these are the things that happen on designated event.
+ * Main block
 **/
 $(document).ready(async () => {
   const chart = new HistoricalTempChart(HistoricalTempChartConfig);
