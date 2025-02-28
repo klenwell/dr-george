@@ -40,6 +40,7 @@ class YearSelector {
     }
 
     this.chart.highlightYear(selectedYear);
+    this.chart.draw();
   }
 
   onYearHover(year) {

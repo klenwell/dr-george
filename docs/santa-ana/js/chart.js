@@ -182,12 +182,24 @@ class HistoricalTempChart {
   /*
    * Methods
   **/
-  clearChart() {
+  draw() {
+    this.plotter.update();
+  }
+
+  hideDatasets() {
     const plotter = this.plotter;
     plotter.data.datasets.forEach((dataset, index) => {
       plotter.setDatasetVisibility(index, false);
     });
     plotter.update();
+  }
+
+  unhideDatasetsByYear(year) {
+    const datasets = this.datasetsByYear[year];
+    const minDatasetIndex = this.plotter.data.datasets.indexOf(datasets[0]);
+    const maxDatasetIndex = this.plotter.data.datasets.indexOf(datasets[1]);
+    this.plotter.setDatasetVisibility(minDatasetIndex, true);
+    this.plotter.setDatasetVisibility(maxDatasetIndex, true);
   }
 
   onHover(event, elements) {
@@ -196,6 +208,7 @@ class HistoricalTempChart {
     const datasetIndex = elements[0].datasetIndex;
     const year = this.plotter.data.datasets[datasetIndex].year;
     this.highlightYear(year);
+    this.plotter.update();
 
     // Custom event that can be used to make other updates (like with dropdown)
     $(document).trigger("yearHover", [year]);
@@ -206,7 +219,6 @@ class HistoricalTempChart {
     this.unhighlightYear(year);
     this.highlightDataset(datasets[0]);
     this.highlightDataset(datasets[1]);
-    this.plotter.update();
   }
 
   unhighlightYear(year) {
