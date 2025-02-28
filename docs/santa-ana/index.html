@@ -63,8 +63,11 @@
           <header class="d-flex justify-content-between align-items-center mt-5">
             <h3>Santa Ana Fire Station &bull; USC00047888</h3>
             <div>
+              <button id="replay" class="btn btn-primary me-2" disabled>Animate &#10024;</button>
               <label for="yearSelector">Select a Year:</label>
-              <select id="yearSelector"></select>
+              <select id="yearSelector">
+                <option>Click Here</option>
+              </select>
             </div>
           </header>
           <div class="chart-block mt-1">
@@ -118,6 +121,7 @@
     <!-- Components -->
     <script src="js/annual-station-data.js"></script>
     <script src="js/year-selector.js"></script>
+    <script src="js/chart-animator.js"></script>
     <script src="js/chart.js"></script>
   </body>
 </html>

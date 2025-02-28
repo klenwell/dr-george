@@ -19,10 +19,6 @@ class YearSelector {
     const $selector = this.selector;
     const years = this.chart.years.toReversed();
 
-    // Default
-    const $defaultOption = $('<option />').val(null).text('Click Here');
-    $selector.append($defaultOption);
-
     years.forEach((year) => component.addYearOption(year));
 
     $selector.on('change', (event) => component.onChange(event));
