@@ -12,7 +12,7 @@ const HistoricalTempChartConfig = {
     minHighlight: '#0077CCFF',
     minMeanHighlight: '#005A99CC',
     max: '#ff880033',
-    maxHighlight: '#bb6600ff',
+    maxHighlight: '#cc3300ff',
     maxMeanHighlight: '#b35f00cc'
   }
 }

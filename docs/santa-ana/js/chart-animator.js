@@ -35,11 +35,9 @@ class ChartAnimator {
   }
 
   async replay() {
-    const self = this;
     const chart = this.chart;
     const years = this.chart.years;
     const delay = this.config.replayDelay;
-    const plotter = this.chart.plotter;
     const dropdown = this.dropdown;
 
     async function replayYears() {
@@ -50,7 +48,7 @@ class ChartAnimator {
 
         chart.unhideDatasetsByYear(year);
         chart.highlightYear(year);
-        plotter.update();
+        chart.draw();
         dropdown.selector.val(year);
 
         lastYear = year;
