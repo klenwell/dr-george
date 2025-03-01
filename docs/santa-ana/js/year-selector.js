@@ -19,18 +19,16 @@ class YearSelector {
     const $selector = this.selector;
     const years = this.chart.years.toReversed();
 
-    // Default
-    const $defaultOption = $('<option />').val(null).text('Click Here');
-    $selector.append($defaultOption);
-
-    years.forEach((year) => {
-      const $option = $('<option />').val(year).text(year);
-      $selector.append($option);
-    });
+    years.forEach((year) => component.addYearOption(year));
 
     $selector.on('change', (event) => component.onChange(event));
 
     $(document).on("yearHover", (e, year) => component.onYearHover(year));
+  }
+
+  addYearOption(year) {
+    const $option = $('<option />').val(year).text(year);
+    this.selector.append($option);
   }
 
   onChange(event) {
@@ -42,6 +40,7 @@ class YearSelector {
     }
 
     this.chart.highlightYear(selectedYear);
+    this.chart.draw();
   }
 
   onYearHover(year) {

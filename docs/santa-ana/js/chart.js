@@ -12,7 +12,7 @@ const HistoricalTempChartConfig = {
     minHighlight: '#0077CCFF',
     minMeanHighlight: '#005A99CC',
     max: '#ff880033',
-    maxHighlight: '#bb6600ff',
+    maxHighlight: '#cc3300ff',
     maxMeanHighlight: '#b35f00cc'
   }
 }
@@ -22,7 +22,7 @@ class HistoricalTempChart {
   constructor(config) {
     this.config = config;
     this.dateTime = luxon.DateTime;
-    this.chart = new Chart(this.canvas, this.chartConfig);
+    this.plotter = new Chart(this.canvas, this.chartConfig);
     this.datasetsByYear = {};
     this.highlightedDatasets = [];
     this.highlightIndex = 0;
@@ -149,7 +149,7 @@ class HistoricalTempChart {
   **/
   async render() {
     const years = this.years.concat(['mean']);
-    const jsChart = this.chart;
+    const plotter = this.plotter;
 
     await Promise.all(
       years.map(async (year) => {
@@ -157,33 +157,58 @@ class HistoricalTempChart {
         await model.fetchData();
         await this.pushDataset(model);
         if ( year % 10 == 1 ) {
-          jsChart.update();
+          plotter.update();
         }
       })
     );
 
     this.highlightMeans();
-    this.chart.update();
+    plotter.update();
+  }
+
+  async animate(yearDropdown) {
+
   }
 
   async pushDataset(model) {
     const minDataSet = this.toDataset(model, 'min');
     const maxDataSet = this.toDataset(model, 'max');
 
-    this.chart.data.datasets.push(minDataSet);
-    this.chart.data.datasets.push(maxDataSet);
+    this.plotter.data.datasets.push(minDataSet);
+    this.plotter.data.datasets.push(maxDataSet);
     this.datasetsByYear[model.year] = [minDataSet, maxDataSet];
   }
 
   /*
    * Methods
   **/
+  draw() {
+    this.plotter.update();
+  }
+
+  hideDatasets() {
+    const plotter = this.plotter;
+    plotter.data.datasets.forEach((dataset, index) => {
+      plotter.setDatasetVisibility(index, false);
+    });
+    plotter.update();
+  }
+
+  unhideDatasetsByYear(year) {
+    const datasets = this.datasetsByYear[year];
+    const minDatasetIndex = this.plotter.data.datasets.indexOf(datasets[0]);
+    const maxDatasetIndex = this.plotter.data.datasets.indexOf(datasets[1]);
+    this.plotter.setDatasetVisibility(minDatasetIndex, true);
+    this.plotter.setDatasetVisibility(maxDatasetIndex, true);
+  }
+
   onHover(event, elements) {
     if ( !elements.length ) return;
 
     const datasetIndex = elements[0].datasetIndex;
-    const year = this.chart.data.datasets[datasetIndex].year;
+    const year = this.plotter.data.datasets[datasetIndex].year;
     this.highlightYear(year);
+    this.plotter.update();
 
     // Custom event that can be used to make other updates (like with dropdown)
     $(document).trigger("yearHover", [year]);
@@ -194,7 +219,6 @@ class HistoricalTempChart {
     this.unhighlightYear(year);
     this.highlightDataset(datasets[0]);
     this.highlightDataset(datasets[1]);
-    this.chart.update();
   }
 
   unhighlightYear(year) {
@@ -287,8 +311,10 @@ class HistoricalTempChart {
 **/
 $(document).ready(async () => {
   const chart = new HistoricalTempChart(HistoricalTempChartConfig);
-  await chart.render();
-
   const yearSelector = new YearSelector(chart);
+  const chartAnimator = new ChartAnimator(chart, yearSelector);
+
+  await chart.render();
   yearSelector.populate();
+  chartAnimator.activate();
 });

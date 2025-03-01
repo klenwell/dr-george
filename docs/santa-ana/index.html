@@ -41,7 +41,7 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li>
             <a
-              href="https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/locations/FIPS:06059/detail#stationlist"
+              href="https://www.ncei.noaa.gov/cdo-web/datasets"
               class="nav-link px-2 link-dark"
               target="_blank">
                 Data
@@ -63,8 +63,11 @@
           <header class="d-flex justify-content-between align-items-center mt-5">
             <h3>Santa Ana Fire Station &bull; USC00047888</h3>
             <div>
+              <button id="replay" class="btn btn-primary me-2" disabled>Animate &#10024;</button>
               <label for="yearSelector">Select a Year:</label>
-              <select id="yearSelector"></select>
+              <select id="yearSelector">
+                <option>Click Here</option>
+              </select>
             </div>
           </header>
           <div class="chart-block mt-1">
@@ -118,6 +121,7 @@
     <!-- Components -->
     <script src="js/annual-station-data.js"></script>
     <script src="js/year-selector.js"></script>
+    <script src="js/chart-animator.js"></script>
     <script src="js/chart.js"></script>
   </body>
 </html>
