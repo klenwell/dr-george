@@ -10,8 +10,38 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
+## Visualization Workflow
+
+Configure NOAA station in `dr_george/config/noaa.py`:
+
+```
+STATIONS = {
+    # https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USC00047888/detail
+    'santa_ana': {
+        'noaa_id': 'USC00047888',
+        'start_year': 1917
+    }
+}
+```
+
+Import NOAA data:
+
+```
+python -m dr_george.main santa_ana
+```
+
+Export JSON data for chart:
+
+```
+python -m dr_george.main export santa_ana
+```
+
+Build web page. Example:
+
+- https://github.com/klenwell/dr-george/blob/main/docs/santa-ana/index.html
+
 ## Local Web Server
-To test web pages in docs directory,
+To test web pages in `docs` directory:
 
 ```
 cd docs
@@ -19,62 +49,3 @@ python -m http.server 3001
 ```
 
 http://localhost:3001/
-
-## Development
-
-This project includes a number of helpers in the `Makefile` to streamline common development tasks.
-
-### Environment Setup
-
-The following demonstrates setting up and working with a development environment:
-
-```
-### create a virtualenv for development
-
-$ make virtualenv
-
-$ source env/bin/activate
-
-
-### run dr_george_app cli application
-
-$ dr_george --help
-
-
-### run pytest / coverage
-
-$ make test
-```
-
-### Releasing to PyPi
-
-Before releasing to PyPi, you must configure your login credentials:
-
-**~/.pypirc**:
-
-```
-[pypi]
-username = YOUR_USERNAME
-password = YOUR_PASSWORD
-```
-
-Then use the included helper function via the `Makefile`:
-
-```
-$ make dist
-
-$ make dist-upload
-```
-
-## Deployments
-
-### Docker
-
-Included is a basic `Dockerfile` for building and distributing `Dr George`,
-and can be built with the included `make` helper:
-
-```
-$ make docker
-
-$ docker run -it dr_george_app --help
-```
