@@ -2,6 +2,8 @@
 
 A simple Python command line app to analyze and visualize public weather data (with a focus on Southern California).
 
+Example visualization: https://klenwell.com/dr-george/santa-ana/
+
 ## Installation
 
 ```
@@ -40,7 +42,7 @@ python -m dr_george.main export santa_ana
 
 Build web page. Example:
 
-- https://github.com/klenwell/dr-george/blob/main/docs/santa-ana/index.html
+- https://klenwell.com/dr-george/santa-ana/
 
 ## Local Web Server
 To test web pages in `docs` directory:
