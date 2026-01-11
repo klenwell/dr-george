@@ -155,8 +155,15 @@ class HistoricalTempChart {
       years.map(async (year) => {
         let model = new AnnualStationData(year);
         await model.fetchData();
-        await this.pushDataset(model);
-        if ( year % 10 == 1 ) {
+
+        if (model.data) {
+          await this.pushDataset(model);
+        }
+        else {
+          console.warn(`No data for year ${year}`)
+        }
+
+        if (year % 10 == 1) {
           plotter.update();
         }
       })
@@ -203,7 +210,7 @@ class HistoricalTempChart {
   }
 
   onHover(event, elements) {
-    if ( !elements.length ) return;
+    if (!elements.length) return;
 
     const datasetIndex = elements[0].datasetIndex;
     const year = this.plotter.data.datasets[datasetIndex].year;
@@ -245,7 +252,7 @@ class HistoricalTempChart {
   }
 
   unhighlightDataset(dataset) {
-    if ( !dataset ) return
+    if (!dataset) return
 
     dataset.borderColor = dataset.oldColor;
     this.highlightedDataset = null;

@@ -15,6 +15,7 @@ class AnnualStationData {
   constructor(year) {
     this.config = AnnualStationDataConfig
     this.year = year
+    this.data = null;
     this.dateTime = luxon.DateTime
   }
 

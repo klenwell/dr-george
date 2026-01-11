@@ -24,11 +24,13 @@ STATIONS = {
 }
 ```
 
-Import NOAA data:
+Download NOAA data:
 
 ```
-python -m dr_george.main santa_ana
+python -m dr_george.main download santa_ana
 ```
+
+Note: You'll have to delete existing data file for a given year to re-download it.
 
 Export JSON data for chart:
 

@@ -19,7 +19,11 @@ class YearSelector {
     const $selector = this.selector;
     const years = this.chart.years.toReversed();
 
-    years.forEach((year) => component.addYearOption(year));
+    years.forEach((year) => {
+      if ( this.chart.datasetsByYear[year] ) {
+        component.addYearOption(year)
+      }
+    });
 
     $selector.on('change', (event) => component.onChange(event));
 
