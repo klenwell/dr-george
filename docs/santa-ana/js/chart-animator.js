@@ -44,6 +44,10 @@ class ChartAnimator {
       let lastYear = null;
 
       for (const year of years) {
+        if ( ! chart.datasetsByYear[year] ) {
+          continue;
+        }
+
         if (lastYear) chart.unhighlightYear(lastYear);
 
         chart.unhideDatasetsByYear(year);
