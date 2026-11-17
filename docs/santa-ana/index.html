@@ -91,12 +91,16 @@
         <section class="chart">
           <header class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-4 mt-md-5">
             <h3>Santa Ana Fire Station &bull; USC00047888</h3>
-            <div>
-              <button id="replay" class="btn btn-primary me-2" disabled>Animate &#10024;</button>
-              <label for="yearSelector">Select a Year:</label>
-              <select id="yearSelector">
-                <option>Click Here</option>
-              </select>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+              <button id="replay" class="btn btn-primary" disabled>Animate &#10024;</button>
+              <!-- One flex item, so a narrow screen wraps before the label, not
+                   between them. They split only if the pair can't fit on a line. -->
+              <span class="d-flex flex-wrap align-items-center gap-1">
+                <label for="yearSelector">Select a Year:</label>
+                <select id="yearSelector">
+                  <option>Click Here</option>
+                </select>
+              </span>
             </div>
           </header>
           <div class="chart-block mt-1 position-relative">
