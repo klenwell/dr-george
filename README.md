@@ -32,7 +32,13 @@ Download NOAA data:
 python -m dr_george.main download santa_ana
 ```
 
-Note: You'll have to delete existing data file for a given year to re-download it.
+Existing years are kept, except the current one, which is always re-downloaded. To refresh specific years (for example, when NOAA has filled in late data):
+
+```
+python -m dr_george.main download santa_ana --years 2025 2026
+```
+
+For the quarterly refresh of the live chart, follow [docs/data-update.md](docs/data-update.md).
 
 Export JSON data for chart:
 
