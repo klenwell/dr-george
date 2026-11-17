@@ -33,6 +33,7 @@ It prints a Markdown table of medians, plus each run's value, ready to paste int
 | Measure | How it's taken |
 |---|---|
 | Ready (ms) | From navigation until the year dropdown is filled (which happens after every year has loaded and the chart has rendered), plus two animation frames for the paint |
+| Data loaded / Draw after data loaded | Marks the page sets in `render()` (since #36): when every year's data has been fetched and added (on the page's clock, from navigation), and how long the one redraw after that took. They show "–" for pages without the marks |
 | Redraws during load | Calls to `Chart.prototype.update` up to ready. The script counts them by wrapping the `Chart` global when the CDN script defines it |
 | Requests / transfer | From the DevTools network log. "Data" means `…/data/*.json`. **Transfer only means something against the live site:** GitHub Pages gzips JSON, and `python3 -m http.server` doesn't |
 | JS heap (MB) | `JSHeapUsedSize` when the chart is ready |

@@ -104,6 +104,11 @@ async function measureOnce(browser, opts) {
   const loadUpdates = await page.evaluate(() => window.__chartUpdates);
   const years = await page.evaluate(() => document.querySelectorAll('#yearSelector option').length - 1);
   const metrics = await page.metrics();
+  // Marks the page sets in render() (added in #36); null on older versions.
+  const marks = await page.evaluate(() => {
+    const at = (name) => performance.getEntriesByName(name)[0]?.startTime ?? null;
+    return { dataLoaded: at('dr-george:data-loaded'), drawn: at('dr-george:drawn') };
+  });
 
   // Hover: sweep the pointer left to right across the band of daily highs.
   // Each move is timed until two animation frames have passed, because
@@ -129,6 +134,8 @@ async function measureOnce(browser, opts) {
   await page.close();
   return {
     readyMs,
+    dataLoadedMs: marks.dataLoaded,
+    finalDrawMs: marks.drawn === null ? null : marks.drawn - marks.dataLoaded,
     loadUpdates,
     requests: net.requests,
     dataRequests: net.dataRequests,
@@ -146,6 +153,8 @@ async function measureOnce(browser, opts) {
 
 const LABELS = {
   readyMs: 'Ready (ms)',
+  dataLoadedMs: 'Data loaded (ms, page clock)',
+  finalDrawMs: 'Draw after data loaded (ms)',
   loadUpdates: 'Redraws during load',
   requests: 'Requests (all)',
   dataRequests: 'Requests (data)',
@@ -160,7 +169,8 @@ const LABELS = {
   years: 'Years in dropdown',
 };
 
-const round = (n) => Math.round(n * 10) / 10;
+const round = (n) => (n === null || Number.isNaN(n) ? null : Math.round(n * 10) / 10);
+const medianOf = (xs) => (xs.some((x) => x === null) ? null : median(xs));
 
 const opts = parseArgs(process.argv.slice(2));
 const browser = await puppeteer.launch({
@@ -176,7 +186,7 @@ try {
   await browser.close();
 }
 
-const summary = Object.fromEntries(Object.keys(LABELS).map((k) => [k, round(median(runs.map((r) => r[k])))]));
+const summary = Object.fromEntries(Object.keys(LABELS).map((k) => [k, round(medianOf(runs.map((r) => r[k])))]));
 
 if (opts.json) {
   console.log(JSON.stringify({ ...opts, date: new Date().toISOString(), median: summary, runs }, null, 2));
@@ -185,6 +195,7 @@ if (opts.json) {
   console.log('| Measure | Median | Runs |');
   console.log('|---|---|---|');
   for (const [k, label] of Object.entries(LABELS)) {
-    console.log(`| ${label} | ${summary[k]} | ${runs.map((r) => round(r[k])).join(', ')} |`);
+    const show = (v) => (v === null ? '–' : v);
+    console.log(`| ${label} | ${show(summary[k])} | ${runs.map((r) => show(round(r[k]))).join(', ')} |`);
   }
 }
