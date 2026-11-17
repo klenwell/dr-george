@@ -32,6 +32,7 @@ class HistoricalTempChart {
     this.highlightedDatasets = [];
     this.highlightedYear = null;
     this.meanPeriod = null;
+    this.matchPanel = new MatchPanel(this);
   }
 
   /*
@@ -56,8 +57,10 @@ class HistoricalTempChart {
         parsing: false,
         normalized: true,
         onHover: (e, els) => this.onHover(e, els),
+        onClick: (e, els) => this.onClick(e, els),
         plugins: {
-          legend: this.legend
+          legend: this.legend,
+          tooltip: this.tooltip
         },
         scales: {
           x: {
@@ -102,6 +105,31 @@ class HistoricalTempChart {
         generateLabels: (chart) => generateLabels(chart)
       }
     }
+  }
+
+  // No colour boxes (they looked like empty checkboxes), averages to one
+  // decimal, and a hint that a click pins the matching years.
+  get tooltip() {
+    const label = (context) => {
+      const dataset = context.dataset;
+      const kind = dataset.extremity === 'max' ? 'high' : 'low';
+      const isMean = dataset.year === 'mean';
+      const value = this.formatTemp(context.parsed.y, isMean);
+      return isMean ? `Average ${kind}: ${value}` : `${dataset.year} ${kind}: ${value}`;
+    };
+
+    return {
+      displayColors: false,
+      footerFont: { weight: 'normal', style: 'italic' },
+      callbacks: {
+        label: label,
+        footer: () => `${this.isTouch ? 'Tap' : 'Click'} to pin matching years`
+      }
+    }
+  }
+
+  get isTouch() {
+    return window.matchMedia('(pointer: coarse)').matches;
   }
 
   get xTicks() {
@@ -244,6 +272,75 @@ class HistoricalTempChart {
 
     // Custom event that can be used to make other updates (like with dropdown)
     $(document).trigger("yearHover", [year]);
+  }
+
+  // Click or tap: pin a panel listing the years with the same value that day.
+  // Clicking the chart away from any line closes it.
+  onClick(event, elements) {
+    if (!elements.length) {
+      this.matchPanel.close();
+      return;
+    }
+
+    const { datasetIndex, index, element } = elements[0];
+    const dataset = this.plotter.data.datasets[datasetIndex];
+
+    // A tap on a phone may not have hovered first.
+    if (!this.isHighlighted(dataset.year)) {
+      this.highlightYear(dataset.year);
+      this.draw();
+      $(document).trigger("yearHover", [dataset.year]);
+    }
+
+    this.matchPanel.open({
+      x: element.x,
+      y: element.y,
+      dayIndex: index,
+      extremity: dataset.extremity,
+      year: dataset.year,
+      value: dataset.data[index].y
+    });
+  }
+
+  // Every year (not the averages) with the same whole-degree value on that
+  // day, newest first.
+  matchingYears(dayIndex, extremity, value) {
+    const target = Math.round(value);
+    const slot = extremity === 'min' ? 0 : 1;
+
+    return Object.keys(this.datasetsByYear)
+      .filter((year) => year !== 'mean')
+      .filter((year) => {
+        const y = this.datasetsByYear[year][slot].data[dayIndex]?.y;
+        return y !== null && y !== undefined && Math.round(y) === target;
+      })
+      .map(Number)
+      .sort((a, b) => b - a);
+  }
+
+  // The hover tooltip is off while a match panel is pinned, so the two don't
+  // overlap. (In Chart.js 3, a tooltip filter that drops every item still
+  // draws an empty box, and a scriptable `enabled` isn't re-read, so the
+  // option is switched and the chart updated.)
+  setTooltipEnabled(enabled) {
+    const tooltipOptions = this.plotter.options.plugins.tooltip;
+    if (tooltipOptions.enabled === enabled) return;
+
+    tooltipOptions.enabled = enabled;
+    if (!enabled) this.plotter.tooltip.setActiveElements([], { x: 0, y: 0 });
+    this.plotter.update();
+  }
+
+  // Chosen from the match panel: highlight it and set the dropdown.
+  pickYear(year) {
+    this.highlightYear(year);
+    this.draw();
+    $(document).trigger("yearPicked", [year]);
+  }
+
+  formatTemp(value, isMean) {
+    const text = isMean ? value.toFixed(1) : String(Math.round(value));
+    return `${text}\u00b0F`;
   }
 
   isHighlighted(year) {
