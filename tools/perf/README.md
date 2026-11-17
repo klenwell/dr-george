@@ -64,3 +64,22 @@ Taken with this script on the owner's Linux desktop, with Chrome 157 in headless
 The local server sends about 19 times as much data as the live site, uncompressed, yet it's no slower to be ready. So download size isn't what slows the page. Redraws are: 13 during load, and 1.8 per hover move, each drawing 222 lines.
 
 **Correction (2026-11-17, #35):** the first version of the script counted every redraw twice, because Chart.js 3 assigns `window.Chart` twice and the script wrapped `update` both times. The table above has the corrected counts (first published as 26 and 3.6). The timings were not affected.
+
+## After #20 (2026-11-17)
+
+Measured on the live site in [#39](https://github.com/klenwell/dr-george/issues/39), after the last step of [#20](https://github.com/klenwell/dr-george/issues/20) was published, on the same machine and Chrome as the baseline. Medians of 5 runs, or 3 at 4x throttle.
+
+| Measure | Baseline (live) | **After (live)** | Baseline, 4x throttle | **After, 4x throttle** |
+|---|---|---|---|---|
+| Ready (ms) | 2,521 (2,354 in the corrected re-run) | **362** | 9,207 | **1,010** |
+| Data loaded / draw after (ms) | – | 247 / 58 | – | 675 / 167 |
+| Redraws during load | 13 | **2** | 13 | 2 |
+| Transfer, data (KB) | 322 | 322 | 322 | 322 |
+| **Hover work per move (ms)** | **647** | **52.2** (runs 51.1–53.1) | 2,693 | **207** |
+| Hover wall time, median (ms) | 700 | 83 | 2,800 | 250 |
+| Redraws per hover move | 1.8 | **0.8** (one per change of year) | 1.8 | 0.8 |
+| JS heap (MB) | 44 | 24 | – | 23 |
+
+What made the difference: the chart draws once after loading instead of 13 times (#36); lines have no point dots or curve smoothing, so a full redraw takes about 2 ms instead of about 200 ms (#36); and hover redraws only when the year changes (#35).
+
+Hover missed its "under 50 ms" target by about 2 ms. The owner accepted that (2026-11-17, #39): Chart.js's own JavaScript is about 25 ms of each move, and most of the rest is the browser painting the canvas, which more tuning or Chart.js 4 wouldn't remove.
