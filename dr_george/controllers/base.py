@@ -2,6 +2,7 @@
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
+from ..core.exc import DrGeorgeError
 
 from requests.exceptions import HTTPError
 import time
@@ -33,11 +34,15 @@ class Base(Controller):
         ]
 
     # To run: python -m dr_george.main download <station_id>
+    # To refresh specific years: python -m dr_george.main download <station_id> --years 2025 2026
     # NOTE: station_id must be defined in config/noaa.py
     @ex(
         help="Download NOAA weather station data and store locally.",
         arguments=[
             (['station_id'], dict(action='store', nargs=1)),
+            (['--years'], dict(
+                action='store', nargs='+', type=int, dest='years', metavar='YEAR',
+                help="Re-download only these years, replacing any existing files.")),
         ],
     )
     def download(self):
@@ -45,12 +50,14 @@ class Base(Controller):
         station = WeatherStation(station_id)
         max_retries = 3
 
-        for year in range(station.start_year, station.end_year+1, 1):
+        years, force = self._download_years(station, self.app.pargs.years)
+
+        for year in years:
             success = False
             retries = 0
             while not success:
                 try:
-                    data = station.download_noaa_data_by_year(year)
+                    data = station.download_noaa_data_by_year(year, force=force)
                     success = True
                     print(f"{year}: {len(data['results'])} of {data['metadata']['resultset']['count']} records")
                 except HTTPError as e:
@@ -59,6 +66,24 @@ class Base(Controller):
                     if retries >= max_retries:
                         raise Exception('Server is hosed: Try again later.')
                     time.sleep(1)
+
+    @staticmethod
+    def _download_years(station, requested_years):
+        """Return (years, force) for the download command.
+
+        With no --years, every year in the station's range is downloaded and
+        existing files are kept (force=False). With --years, only those years
+        are downloaded and their files replaced (force=True).
+        """
+        if not requested_years:
+            return list(station.years), False
+
+        out_of_range = [y for y in requested_years if y not in station.years]
+        if out_of_range:
+            raise DrGeorgeError(
+                f"Years out of range {station.start_year}-{station.end_year}: {out_of_range}")
+
+        return sorted(set(requested_years)), True
 
     # To run: python -m dr_george.main test-download
     @ex(help="Download a single year to sanity check download action.")
