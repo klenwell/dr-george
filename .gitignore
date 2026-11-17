@@ -109,3 +109,6 @@ secrets.py
 
 # Local scratch files (screenshots, notes)
 /tmp/
+
+# Node tooling (tools/perf)
+node_modules/

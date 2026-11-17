@@ -1,0 +1,16 @@
+{
+  "name": "dr-george-perf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Measures load and hover performance of the Dr. George chart page.",
+  "type": "module",
+  "scripts": {
+    "measure": "node measure.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "puppeteer-core": "22.15.0"
+  }
+}
