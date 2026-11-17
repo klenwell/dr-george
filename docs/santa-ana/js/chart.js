@@ -52,6 +52,8 @@ class HistoricalTempChart {
       },
       options: {
         animation: false,
+        // Fill .chart-block, whose height the page's CSS sets per screen size.
+        maintainAspectRatio: false,
         // Data arrives as {x: day index, y: temp}, already sorted, so
         // Chart.js can skip parsing it on every update.
         parsing: false,
@@ -431,7 +433,8 @@ class HistoricalTempChart {
       // No dots or curve smoothing: with 222 lines of 366 days, they made
       // every redraw cost hundreds of ms. A point still shows on hover.
       pointRadius: 0,
-      pointHitRadius: 3,
+      // Easier to hit with a finger than with a mouse.
+      pointHitRadius: this.isTouch ? 6 : 3,
       tension: 0
     }
   }

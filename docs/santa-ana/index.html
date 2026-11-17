@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dr. George: Historical Santa Ana</title>
 
     <!-- CSS Styling -->
@@ -29,6 +30,14 @@
     </script> -->
 
     <style>
+      /* The chart fills this box (maintainAspectRatio: false): about 2:1 on
+         desktop as before, taller than 2:1 on a phone so it stays readable,
+         and never taller than 80% of the screen (a phone held sideways). */
+      .chart-block {
+        height: 50vw;
+        min-height: min(360px, 80vh);
+        max-height: min(560px, 80vh);
+      }
       .match-panel {
         position: absolute;
         z-index: 10;
@@ -39,6 +48,11 @@
       .match-panel .match-list {
         max-height: 18rem;
         overflow-y: auto;
+      }
+      @media (max-width: 576px) {
+        .match-panel .match-list {
+          max-height: 10rem;
+        }
       }
     </style>
   </head>
@@ -75,7 +89,7 @@
 
       <main>
         <section class="chart">
-          <header class="d-flex justify-content-between align-items-center mt-5">
+          <header class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-4 mt-md-5">
             <h3>Santa Ana Fire Station &bull; USC00047888</h3>
             <div>
               <button id="replay" class="btn btn-primary me-2" disabled>Animate &#10024;</button>
