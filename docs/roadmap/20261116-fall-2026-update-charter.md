@@ -33,6 +33,7 @@ This is the first of a series of **quarterly updates**. Each one refreshes the d
   - The Bootstrap CSS (5.2.0-beta1) and JS (5.0.2) versions don't match.
   - `chartjs-adapter-date-fns` loads with no pinned version, and it looks unused (the x-axis is category labels).
 - There are no front-end tests. The Python tests are the Cement template's (`command1`).
+- *Result (2026-11-17, [#39](https://github.com/klenwell/dr-george/issues/39)):* after epic [#20](https://github.com/klenwell/dr-george/issues/20), the live page is ready in about 0.36 s (was 2.5 s), and hover work is about 52 ms per move (was 648 ms). The smaller issues above are fixed, and the matching-year picker works on click or tap. See the [before and after](../../tools/perf/README.md#after-20-2026-11-17).
 
 ## Goals
 
