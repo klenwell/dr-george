@@ -53,11 +53,13 @@ Taken with this script on the owner's Linux desktop, with Chrome 157 in headless
 | Measure | Live site | Local server | Live, 4x CPU throttle |
 |---|---|---|---|
 | Ready (ms) | 2,521 (runs: 2,019–2,619) | 2,107 | 9,207 |
-| Redraws during load | 26 | 26 | 26 |
+| Redraws during load | 13 | 13 | 13 |
 | Requests (data) | 111 | 111 | 111 |
 | Transfer, data (KB) | 322 | 6,172 (uncompressed) | 322 |
 | **Hover work per move (ms)** | **647** | 665 | 2,693 |
 | Hover wall time, median (ms) | 700 | 717 | 2,800 |
-| Redraws per hover move | 3.6 | 3.6 | 3.6 |
+| Redraws per hover move | 1.8 | 1.8 | 1.8 |
 
-The local server sends about 19 times as much data as the live site, uncompressed, yet it's no slower to be ready. So download size isn't what slows the page. Redraws are: 26 during load, and 3.6 per hover move, each drawing 222 lines.
+The local server sends about 19 times as much data as the live site, uncompressed, yet it's no slower to be ready. So download size isn't what slows the page. Redraws are: 13 during load, and 1.8 per hover move, each drawing 222 lines.
+
+**Correction (2026-11-17, #35):** the first version of the script counted every redraw twice, because Chart.js 3 assigns `window.Chart` twice and the script wrapped `update` both times. The table above has the corrected counts (first published as 26 and 3.6). The timings were not affected.

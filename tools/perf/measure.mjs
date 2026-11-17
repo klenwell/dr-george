@@ -41,6 +41,8 @@ const percentile = (xs, p) => sorted(xs)[Math.min(xs.length - 1, Math.floor(xs.l
 const twoFrames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
 // Count Chart.update() calls: wrap the Chart global as soon as the CDN script defines it.
+// Chart.js 3 assigns window.Chart twice with the same class, so wrap only once
+// (wrapping twice counted every update as two before 2026-11-17).
 function countChartUpdates() {
   let ChartClass;
   window.__chartUpdates = 0;
@@ -48,11 +50,16 @@ function countChartUpdates() {
     configurable: true,
     get() { return ChartClass; },
     set(value) {
+      if (value === ChartClass || value.prototype.update.__counted) {
+        ChartClass = value;
+        return;
+      }
       const update = value.prototype.update;
       value.prototype.update = function (...args) {
         window.__chartUpdates++;
         return update.apply(this, args);
       };
+      value.prototype.update.__counted = true;
       ChartClass = value;
     },
   });
