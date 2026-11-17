@@ -51,6 +51,10 @@ class HistoricalTempChart {
       },
       options: {
         animation: false,
+        // Data arrives as {x: day index, y: temp}, already sorted, so
+        // Chart.js can skip parsing it on every update.
+        parsing: false,
+        normalized: true,
         onHover: (e, els) => this.onHover(e, els),
         plugins: {
           legend: this.legend
@@ -161,6 +165,8 @@ class HistoricalTempChart {
     const years = this.years.concat(['mean']);
     const plotter = this.plotter;
 
+    // Fetch every year, then draw once. Drawing as years arrived (every
+    // tenth year) cost more than it showed.
     await Promise.all(
       years.map(async (year) => {
         let model = new AnnualStationData(year);
@@ -172,15 +178,14 @@ class HistoricalTempChart {
         else {
           console.warn(`No data for year ${year}`)
         }
-
-        if (year % 10 == 1) {
-          plotter.update();
-        }
       })
     );
+    performance.mark('dr-george:data-loaded');
 
     this.highlightMeans();
     plotter.update();
+    performance.mark('dr-george:drawn');
+    $('#chartLoading').remove();
   }
 
   async animate(yearDropdown) {
@@ -291,17 +296,18 @@ class HistoricalTempChart {
     dataset.order = dataset.oldOrder;
   }
 
+  // Width 3: without point dots, the old width of 2 read thinner than before.
   highlightMeans() {
     const [minDataset, maxDataset] = this.datasetsByYear['mean']
 
     // Min
     minDataset.borderColor = this.config.colors.minMeanHighlight;
-    minDataset.borderWidth = 2;
+    minDataset.borderWidth = 3;
     minDataset.order = MEAN_ORDER;
 
     // Max
     maxDataset.borderColor = this.config.colors.maxMeanHighlight;
-    maxDataset.borderWidth = 2;
+    maxDataset.borderWidth = 3;
     maxDataset.order = MEAN_ORDER;
   }
 
@@ -311,7 +317,7 @@ class HistoricalTempChart {
       'max': [model.maxTemps, `Max ${model.year}`, this.config.colors.max]
     }
 
-    const data = typeMap[extremity][0];
+    const data = typeMap[extremity][0].map((y, x) => ({ x, y }));
     const label = typeMap[extremity][1];
     const color = typeMap[extremity][2];
     const order = this.thisYear - model.year;
@@ -325,9 +331,11 @@ class HistoricalTempChart {
       order: order,
       fill: false,
       borderWidth: 1,
-      pointRadius: 1,
+      // No dots or curve smoothing: with 222 lines of 366 days, they made
+      // every redraw cost hundreds of ms. A point still shows on hover.
+      pointRadius: 0,
       pointHitRadius: 3,
-      tension: 0.5
+      tension: 0
     }
   }
 
