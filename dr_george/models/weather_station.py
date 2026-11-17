@@ -42,6 +42,19 @@ class WeatherStation:
     def years(self):
         return range(self.start_year, self.end_year+1)
 
+    @property
+    def mean_end_year(self):
+        """Last year in the mean: the year before the current one.
+
+        The current calendar year is still filling in, so it's left out of
+        the mean. Earlier years with gaps are still averaged day by day.
+        """
+        return min(self.end_year, date.today().year - 1)
+
+    @property
+    def mean_years(self):
+        return range(self.start_year, self.mean_end_year+1)
+
     @cached_property
     def dates(self):
         dates = []
@@ -65,11 +78,12 @@ class WeatherStation:
     @cached_property
     def daily_mean_reports(self):
         reports = []
+        years = self.mean_years
         for day_num in abs_day_nums_in_year():
-            max_temp = self.avg_max_temp_by_doy(day_num)
-            min_temp = self.avg_min_temp_by_doy(day_num)
-            precip = self.avg_rain_by_doy(day_num)
-            dated = abs_day_num_to_date(self.end_year, day_num)
+            max_temp = self.avg_max_temp_by_doy(day_num, years)
+            min_temp = self.avg_min_temp_by_doy(day_num, years)
+            precip = self.avg_rain_by_doy(day_num, years)
+            dated = abs_day_num_to_date(self.mean_end_year, day_num)
             report = DailyStationSummary(self, dated, max_temp, min_temp, precip)
             reports.append(report)
         return reports
@@ -127,6 +141,8 @@ class WeatherStation:
         json_data = {
             'noaa_id': self.noaa_id,
             'year': 'mean',
+            'start_year': self.start_year,
+            'end_year': self.mean_end_year,
             'daily': [dr.to_dict() for dr in self.daily_mean_reports]
         }
 
@@ -136,20 +152,27 @@ class WeatherStation:
         return json_path
 
 
-    def daily_summaries_by_doy(self, day_of_year):
+    def daily_summaries_by_doy(self, day_of_year, years=None):
+        """Each year's summary for one day of the year. years limits which
+        years are included (default: all of them)."""
         daily_summaries = []
         for annual_summary in self.annual_summaries:
+            if years is not None and annual_summary.year not in years:
+                continue
             daily_summary = annual_summary.daily_summary_by_doy(day_of_year)
             daily_summaries.append(daily_summary)
         return daily_summaries
+
+    def has_raw_data(self, year):
+        return os.path.exists(self.json_zpath_by_year(year))
 
     def json_records_by_year(self, year):
         zpath = self.json_zpath_by_year(year)
         with gzip.open(zpath, 'rt', encoding='utf-8') as f:
                 return json.load(f)
 
-    def avg_max_temp_by_doy(self, day_of_year):
-        daily_reports = self.daily_summaries_by_doy(day_of_year)
+    def avg_max_temp_by_doy(self, day_of_year, years=None):
+        daily_reports = self.daily_summaries_by_doy(day_of_year, years)
         max_temps = [report.max_temp for report in daily_reports if report.max_temp != None]
         return statistics.mean(max_temps)
 
@@ -159,13 +182,13 @@ class WeatherStation:
         sorted_reports = sorted(valid_reports, key=lambda r: (r.max_temp, r.year), reverse=True)
         return sorted_reports[0]
 
-    def avg_min_temp_by_doy(self, day_of_year):
-        daily_reports = self.daily_summaries_by_doy(day_of_year)
+    def avg_min_temp_by_doy(self, day_of_year, years=None):
+        daily_reports = self.daily_summaries_by_doy(day_of_year, years)
         max_temps = [report.min_temp for report in daily_reports if report.min_temp != None]
         return statistics.mean(max_temps)
 
-    def avg_rain_by_doy(self, day_of_year):
-        daily_reports = self.daily_summaries_by_doy(day_of_year)
+    def avg_rain_by_doy(self, day_of_year, years=None):
+        daily_reports = self.daily_summaries_by_doy(day_of_year, years)
         rain_amts = [dr.precipitation for dr in daily_reports if dr.precipitation != None]
         return statistics.mean(rain_amts)
 

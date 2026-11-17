@@ -26,6 +26,7 @@ class HistoricalTempChart {
     this.datasetsByYear = {};
     this.highlightedDatasets = [];
     this.highlightIndex = 0;
+    this.meanPeriod = null;
   }
 
   /*
@@ -64,28 +65,32 @@ class HistoricalTempChart {
     }
   }
 
+  // Only the mean datasets get a legend entry. The period comes from the
+  // mean file (start_year, end_year), so each data update changes it.
   get legend() {
     const labelTextMap = {
-      'Min mean': 'Average Mins',
-      'Max mean': 'Average Maxes'
+      'Min mean': 'Average Lows',
+      'Max mean': 'Average Highs'
     }
-    const displayedLabels = Object.values(labelTextMap);
 
     const generateLabels = (chart) => {
-      return chart.data.datasets.map((dataset, index) => ({
-        text: labelTextMap[dataset.label],
-        strokeStyle: dataset.borderColor,
-        fillStyle: dataset.borderColor,
-        datasetIndex: index
-      }));
+      const period = this.meanPeriod ? ` ${this.meanPeriod}` : '';
+      return chart.data.datasets
+        .map((dataset, index) => ({ dataset, index }))
+        .filter(({ dataset }) => labelTextMap[dataset.label])
+        .map(({ dataset, index }) => ({
+          text: `${labelTextMap[dataset.label]}${period}`,
+          strokeStyle: dataset.borderColor,
+          fillStyle: dataset.borderColor,
+          datasetIndex: index
+        }));
     }
 
     return {
       display: true,
       labels: {
         usePointStyle: true,
-        generateLabels: (chart) => generateLabels(chart),
-        filter: (legendItem, chartData) => displayedLabels.includes(legendItem.text)
+        generateLabels: (chart) => generateLabels(chart)
       }
     }
   }
@@ -184,6 +189,10 @@ class HistoricalTempChart {
     this.plotter.data.datasets.push(minDataSet);
     this.plotter.data.datasets.push(maxDataSet);
     this.datasetsByYear[model.year] = [minDataSet, maxDataSet];
+
+    if (model.year === 'mean' && model.data.start_year && model.data.end_year) {
+      this.meanPeriod = `${model.data.start_year}\u2013${model.data.end_year}`;
+    }
   }
 
   /*

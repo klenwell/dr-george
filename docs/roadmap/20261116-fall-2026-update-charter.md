@@ -16,7 +16,7 @@ This is the first of a series of **quarterly updates**. Each one refreshes the d
 - **There's no 2026 file,** so the chart ends at 2025.
 - The CLI (`download`, `export`) re-downloads a year only after its file is deleted by hand (README).
 - It calls NOAA's CDO web services v2 (`cdo-web/api/v2/data`) with a token kept in the gitignored `dr_george/config/secrets.py`. Whether the token and the API still work hasn't been checked since January.
-- `-mean.json` dates from 2025-02-24, so the averages probably cover 1917–2024. It's never been rebuilt.
+- `-mean.json` dates from 2025-02-24, so the averages probably cover 1917–2024. It's never been rebuilt. *Corrected 2026-11-16 ([#24](https://github.com/klenwell/dr-george/issues/24)):* the mean averaged every year through the current one, so it included January–February 2025. It wasn't rebuilt in January 2026 because `export` crashed silently on 2026, which had no download yet.
 
 **Chart page** (`docs/santa-ana/`, Chart.js 3.8 with jQuery)
 - **Every load fetches 110 files, about 6.1 MB.** Each yearly file has the date, station ID and precipitation for every day, and the chart uses none of them.
@@ -100,7 +100,7 @@ Epic 1 comes first: it's quick, it fixes the most visible problem, and it tests 
 
 Approved with the recommended options. Any of them can be revisited when its epic or ticket is planned.
 
-1. **The mean is rebuilt over all complete years** (1917–2025 this time) on each update, and the legend names the period ("Average 1917–2025"). Alternatives considered: keep it as it is (about 1917–2024), or use NOAA's 1991–2020 normal. The 30-year normal could be a later story.
+1. **The mean is rebuilt over all complete years** (1917–2025 this time) on each update, and the legend names the period ("Average Highs 1917–2025", [#24](https://github.com/klenwell/dr-george/issues/24)). Alternatives considered: keep it as it is (1917 through part of 2025), or use NOAA's 1991–2020 normal. The 30-year normal could be a later story.
 2. **One combined data file.** `export` writes one compact file with the highs and lows for every year, roughly 0.3–0.5 MB before Pages' gzip, in place of 110 requests. Epic 2 confirms this with measurements. Slimmed per-year files are the fallback.
 3. **Chart.js stays on 3.8 for now.** Epic 2 revisits a move to 4.x only if the cheaper fixes don't reach the targets.
 4. **The Project is a user Project on `klenwell`, named "Dr. George",** and is reused by every quarterly update.
