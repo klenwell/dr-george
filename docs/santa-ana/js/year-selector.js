@@ -47,7 +47,9 @@ class YearSelector {
     this.chart.draw();
   }
 
+  // The chart has already highlighted and drawn the year, so set the value
+  // without triggering 'change', which would highlight and draw it again.
   onYearHover(year) {
-    this.selector.val(year).trigger('change');
+    this.selector.val(year);
   }
 }

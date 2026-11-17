@@ -17,6 +17,11 @@ const HistoricalTempChartConfig = {
   }
 }
 
+// Chart.js draws datasets with a lower order on top. Years use 0 (this year)
+// and up, so the highlighted year goes above them, and the averages above it.
+const HIGHLIGHT_ORDER = -500;
+const MEAN_ORDER = -1000;
+
 
 class HistoricalTempChart {
   constructor(config) {
@@ -25,7 +30,7 @@ class HistoricalTempChart {
     this.plotter = new Chart(this.canvas, this.chartConfig);
     this.datasetsByYear = {};
     this.highlightedDatasets = [];
-    this.highlightIndex = 0;
+    this.highlightedYear = null;
     this.meanPeriod = null;
   }
 
@@ -218,31 +223,50 @@ class HistoricalTempChart {
     this.plotter.setDatasetVisibility(maxDatasetIndex, true);
   }
 
+  // Redraw only when the pointer reaches a different year. Chart.js calls
+  // onHover again after every update (it replays the last event), and most
+  // pointer moves land on a new year, so this guard is what keeps a hover to
+  // one redraw.
   onHover(event, elements) {
     if (!elements.length) return;
 
     const datasetIndex = elements[0].datasetIndex;
     const year = this.plotter.data.datasets[datasetIndex].year;
+    if (this.isHighlighted(year)) return;
+
     this.highlightYear(year);
-    this.plotter.update();
+    this.draw();
 
     // Custom event that can be used to make other updates (like with dropdown)
     $(document).trigger("yearHover", [year]);
   }
 
-  highlightYear(year) {
-    const datasets = this.datasetsByYear[year];
-    this.unhighlightYear(year);
-    this.highlightDataset(datasets[0]);
-    this.highlightDataset(datasets[1]);
+  isHighlighted(year) {
+    return this.highlightedYear !== null && String(year) === this.highlightedYear;
   }
 
+  highlightYear(year) {
+    const datasets = this.datasetsByYear[year];
+    if (!datasets) return;
+
+    this.clearHighlight();
+    this.highlightDataset(datasets[0]);
+    this.highlightDataset(datasets[1]);
+    this.highlightedYear = String(year);
+  }
+
+  // Unhighlights the year if it's the one highlighted.
   unhighlightYear(year) {
+    if (this.isHighlighted(year)) this.clearHighlight();
+  }
+
+  clearHighlight() {
     this.highlightedDatasets.forEach((dataset) => {
       this.unhighlightDataset(dataset);
     });
 
     this.highlightedDatasets = [];
+    this.highlightedYear = null;
   }
 
   highlightDataset(dataset) {
@@ -253,10 +277,10 @@ class HistoricalTempChart {
     const color = colorMap[dataset.extremity];
 
     dataset.oldColor = dataset.borderColor;
+    dataset.oldOrder = dataset.order;
     dataset.borderColor = color;
-    dataset.order = this.highlightIndex;
+    dataset.order = HIGHLIGHT_ORDER;
 
-    this.highlightIndex--;
     this.highlightedDatasets.push(dataset);
   }
 
@@ -264,7 +288,7 @@ class HistoricalTempChart {
     if (!dataset) return
 
     dataset.borderColor = dataset.oldColor;
-    this.highlightedDataset = null;
+    dataset.order = dataset.oldOrder;
   }
 
   highlightMeans() {
@@ -273,12 +297,12 @@ class HistoricalTempChart {
     // Min
     minDataset.borderColor = this.config.colors.minMeanHighlight;
     minDataset.borderWidth = 2;
-    minDataset.order = -1000;
+    minDataset.order = MEAN_ORDER;
 
     // Max
     maxDataset.borderColor = this.config.colors.maxMeanHighlight;
     maxDataset.borderWidth = 2;
-    maxDataset.order = -1000;
+    maxDataset.order = MEAN_ORDER;
   }
 
   toDataset(model, extremity) {
