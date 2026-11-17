@@ -30,12 +30,14 @@ class AnnualStationData {
     return this.data.daily;
   }
 
+  // parseFloat, not parseInt: yearly values are whole degrees anyway, and the
+  // averages (81.6) were being cut to whole degrees (81).
   get maxTemps() {
-    return this.dailies.map((daily) => daily.max_temp ? parseInt(daily.max_temp) : null);
+    return this.dailies.map((daily) => daily.max_temp ? parseFloat(daily.max_temp) : null);
   }
 
   get minTemps() {
-    return this.dailies.map((daily) => daily.min_temp ? parseInt(daily.min_temp) : null);
+    return this.dailies.map((daily) => daily.min_temp ? parseFloat(daily.min_temp) : null);
   }
 
   /*

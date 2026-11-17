@@ -27,6 +27,20 @@
       gtag('js', new Date());
       gtag('config', 'TBA');
     </script> -->
+
+    <style>
+      .match-panel {
+        position: absolute;
+        z-index: 10;
+        width: 15rem;
+        max-width: calc(100% - 1rem);
+      }
+      /* Scroll after about 10 rows */
+      .match-panel .match-list {
+        max-height: 18rem;
+        overflow-y: auto;
+      }
+    </style>
   </head>
 
   <body>
@@ -117,6 +131,7 @@
     <script src="js/annual-station-data.js"></script>
     <script src="js/year-selector.js"></script>
     <script src="js/chart-animator.js"></script>
+    <script src="js/match-panel.js"></script>
     <script src="js/chart.js"></script>
   </body>
 </html>

@@ -27,7 +27,7 @@ class YearSelector {
 
     $selector.on('change', (event) => component.onChange(event));
 
-    $(document).on("yearHover", (e, year) => component.onYearHover(year));
+    $(document).on("yearHover yearPicked", (e, year) => component.onYearHover(year));
   }
 
   addYearOption(year) {
