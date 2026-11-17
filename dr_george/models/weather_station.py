@@ -74,17 +74,31 @@ class WeatherStation:
             reports.append(report)
         return reports
 
-    def download_noaa_data_by_year(self, year):
+    def download_noaa_data_by_year(self, year, force=False):
+        """Download a year's NOAA records and save them as gzipped JSON.
+
+        An existing file is reused, except for the current year (which is
+        still filling in) or when force is True. The new file is written to
+        a temp path and renamed into place, so a failed fetch or write never
+        damages an existing file.
+        """
         zpath = self.json_zpath_by_year(year)
 
-        if os.path.exists(zpath) and year != self.end_year:
+        if os.path.exists(zpath) and year != self.end_year and not force:
             print(f"{year}: {zpath} exists")
             return self.json_records_by_year(year)
-        else:
-            data = self.noaa.get_json_records_by_year(self.api_id, year)
-            print(f"{year}: writing to {zpath}")
-            with gzip.open(zpath, 'wt', encoding='utf-8') as f:
+
+        data = self.noaa.get_json_records_by_year(self.api_id, year)
+        print(f"{year}: writing to {zpath}")
+
+        tmp_path = f"{zpath}.tmp"
+        try:
+            with gzip.open(tmp_path, 'wt', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
+            os.replace(tmp_path, zpath)
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
 
         return data
 
