@@ -19,7 +19,7 @@ This is the first of a series of **quarterly updates**. Each one refreshes the d
 - `-mean.json` dates from 2025-02-24, so the averages probably cover 1917–2024. It's never been rebuilt. *Corrected 2026-11-16 ([#24](https://github.com/klenwell/dr-george/issues/24)):* the mean averaged every year through the current one, so it included January–February 2025. It wasn't rebuilt in January 2026 because `export` crashed silently on 2026, which had no download yet.
 
 **Chart page** (`docs/santa-ana/`, Chart.js 3.8 with jQuery)
-- **Every load fetches 110 files, about 6.1 MB.** Each yearly file has the date, station ID and precipitation for every day, and the chart uses none of them.
+- **Every load fetches 110 files, about 6.1 MB.** Each yearly file has the date, station ID and precipitation for every day, and the chart uses none of them. *Corrected 2026-11-17 ([#33](https://github.com/klenwell/dr-george/issues/33)):* 6.1 MB is the uncompressed size. GitHub Pages gzips the JSON, so a load transfers about 322 KB (111 requests), and the page is just as slow from a local server that doesn't compress. The cost is in drawing, not downloading. See the [baseline](../../tools/perf/README.md#baseline-2026-11-17-before-20).
 - **The chart draws about 220 line datasets × 366 points** (around 80,000 points) with curve smoothing (`tension: 0.5`) and a visible point at each value.
 - **Each hover redraws the chart twice.** `onHover` calls `update()`, then fires `yearHover`, which sets the year dropdown. Its `change` handler highlights the year again and calls `draw()`. This runs on every mouse move over a point.
 - **The rollover's "pick a matching year" feature doesn't work** (from the owner's screenshot, 2026-11-16).
@@ -118,6 +118,6 @@ Approved with the recommended options. Any of them can be revisited when its epi
 - The Project tracks this update's epics, with every step closed by a merged PR.
 - From any point, you can pick another year with the same temperature on that date, and it gets highlighted. This works with a mouse and on a phone.
 - Measured on the same machine and browser:
-  - First load transfers less than 1 MB of data, down from about 6.1 MB.
+  - ~~First load transfers less than 1 MB of data, down from about 6.1 MB.~~ It already transfers about 322 KB (#33). The targets are now in epic [#20](https://github.com/klenwell/dr-george/issues/20): hover under 50 ms, and ready under 1.5 s.
   - Hovering stays smooth, with one redraw per hover change.
 - `docs/data-update.md` lets the next quarterly refresh be done in one sitting.
