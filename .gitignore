@@ -106,3 +106,6 @@ venv.bak/
 
 # Keep secrets out of the repo
 secrets.py
+
+# Local scratch files (screenshots, notes)
+/tmp/
