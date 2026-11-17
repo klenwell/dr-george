@@ -107,6 +107,9 @@ class Base(Controller):
         station = WeatherStation(station_id)
 
         for year in range(station.start_year, station.end_year+1, 1):
+            if not station.has_raw_data(year):
+                print(f"Skipped {year}: no downloaded data (run download first)")
+                continue
             fpath = station.export_summary_to_json(year)
             print(f"Exported {year}: {fpath}")
 
