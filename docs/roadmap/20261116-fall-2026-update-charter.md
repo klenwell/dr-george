@@ -1,6 +1,6 @@
 # Charter: Fall 2026 Update
 
-Written: 2026-11-16 · **Status: active** (approved 2026-11-16). Epics are refined one at a time with `/epic` and tracked as issues in `dr-george`, in a new Dr. George GitHub Project (Epic 1, Step 00).
+Written: 2026-11-16 · **Status: complete** (approved 2026-11-16, completed 2026-11-18; see the [retrospective](../retrospectives/20261118-fall-2026-update.md), and releases [v2026.11.0](https://github.com/klenwell/dr-george/releases/tag/v2026.11.0) and [v2026.11.1](https://github.com/klenwell/dr-george/releases/tag/v2026.11.1)). Epics are refined one at a time with `/epic` and tracked as issues in `dr-george`, in a new Dr. George GitHub Project (Epic 1, Step 00).
 
 ## Why
 
