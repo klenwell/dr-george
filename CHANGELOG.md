@@ -2,6 +2,10 @@
 
 Versions are dated (`YEAR.MONTH.PATCH`). Each quarterly update is a release, and a fix between updates bumps the patch. Each release is tagged `v<version>` on GitHub.
 
+## 2026.11.1 (unreleased)
+
+- The runbook's troubleshooting no longer says errors only show with `--debug`. They always print a traceback on stderr and exit 1 ([#28](https://github.com/klenwell/dr-george/issues/28), closed as not reproducible).
+
 ## 2026.11.0 (2026-11-17): Fall 2026 update
 
 The first quarterly update. The plan is in the [Fall 2026 charter](docs/roadmap/20261116-fall-2026-update-charter.md), and the work is tracked in the [Dr. George Project](https://github.com/users/klenwell/projects/2).

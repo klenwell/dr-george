@@ -72,7 +72,7 @@ A complete year has about 1,095 records (high, low and precipitation × 365 days
 
 This writes `docs/santa-ana/data/USC00047888-<year>.json` for every downloaded year, then `USC00047888-mean.json`. The mean averages complete years only, from 1917 through last year, and the chart's legend shows that period. Check the output:
 
-- **The last line should be `Export means: …`.** If the output stops early with no error, rerun with `--debug` (`python -m dr_george.main --debug export santa_ana`) to see the error ([#28](https://github.com/klenwell/dr-george/issues/28)).
+- **The last line should be `Export means: …`.** If it stops early, a Python traceback follows the last line, and the command exits 1 (check with `echo $?`). The traceback goes to stderr, so it doesn't show if only stdout is captured.
 - `Skipped <year>: no downloaded data` means that year was never downloaded. Go back to step 2.
 
 ### 4. Check what changed
@@ -134,8 +134,8 @@ gh api repos/klenwell/dr-george/pages/builds/latest --jq '"\(.status) \(.commit[
 | Symptom | Cause and fix |
 |---|---|
 | `Command 'python' not found` | pyenv isn't set up in this shell. Use the full path, `~/.pyenv/versions/dr-george/bin/python` |
-| `download` prints `failed <HTTP error>` three times, then stops | NOAA rejected the request three times in a row. A 400 or 401 usually means a bad token: check `secrets.py`, and request a new token if it's no longer valid. A 5xx means NOAA is having trouble, so retry later. The final error (`Server is hosed`) only shows with `--debug` ([#28](https://github.com/klenwell/dr-george/issues/28)) |
-| `export` stops early with no error | An unexpected error. Rerun with `--debug` ([#28](https://github.com/klenwell/dr-george/issues/28)). In January 2026, this happened because the current year had no download yet. `export` now skips such years |
+| `download` prints `failed <HTTP error>` three times, then stops | NOAA rejected the request three times in a row. A 400 or 401 usually means a bad token: check `secrets.py`, and request a new token if it's no longer valid. A 5xx means NOAA is having trouble, so retry later. It then stops with a traceback ending in `Exception: Server is hosed: Try again later.` |
+| `export` stops early | An unexpected error. Its traceback is on stderr, and the command exits 1. Make sure you're seeing stderr (for example, don't redirect it with `2>/dev/null`). In January 2026, this happened because the current year had no download yet. `export` now skips such years |
 | A year's lines are blank for recent weeks | NOAA hasn't published those days yet (see [When](#when)). It fills in at the next update |
 | The legend shows `1917â€“2025` | The page is being read with the wrong character encoding. `index.html` must keep `<meta charset="utf-8">` |
 | The page still shows old data after merging | Pages is still building, or the browser has cached it. Check the build command above, then hard-refresh |
