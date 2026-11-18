@@ -2,8 +2,11 @@
 
 Versions are dated (`YEAR.MONTH.PATCH`). Each quarterly update is a release, and a fix between updates bumps the patch. Each release is tagged `v<version>` on GitHub.
 
-## 2026.11.1 (unreleased)
+## 2026.11.1 (2026-11-18)
 
+A patch release for the Fall 2026 close-out (epic [#21](https://github.com/klenwell/dr-george/issues/21)). The live chart is unchanged.
+
+- The test suite runs with no warnings, and any new warning now fails it (`filterwarnings = error` in `setup.cfg`). The Cement deprecation warning is fixed at its cause: `framework_logging = False`. `--debug` works as before, without Cement's internal hook and handler messages. Set `CEMENT_FRAMEWORK_LOGGING=1` to see them ([#30](https://github.com/klenwell/dr-george/issues/30)).
 - The runbook's troubleshooting no longer says errors only show with `--debug`. They always print a traceback on stderr and exit 1 ([#28](https://github.com/klenwell/dr-george/issues/28), closed as not reproducible).
 
 ## 2026.11.0 (2026-11-17): Fall 2026 update
