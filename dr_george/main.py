@@ -21,6 +21,12 @@ class DrGeorge(App):
         # call sys.exit() on close
         exit_on_close = True
 
+        # Cement's own internal debug logging. True (the default) is
+        # deprecated in Cement 3.0.8 and warns on every app start. False
+        # keeps --debug for the app; set CEMENT_FRAMEWORK_LOGGING=1 to see
+        # Cement's hook and handler messages again.
+        framework_logging = False
+
         # load additional framework extensions
         extensions = [
             'yaml',
